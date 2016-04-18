@@ -1,0 +1,112 @@
+section {position:absolute; height:100%;}
+
+.view-animate {
+    position:absolute;
+    height:100%;
+    opacity:1;   
+        @include vendor-prefix(transition, all 1s ease-in-out);   
+}
+
+.page_view{opacity:1;@include vendor-prefix(transition, all 3s ease-in-out);}
+.home_view{opacity:0;}
+.view-animate.ng-enter{opacity:0;}
+.view-animate.ng-enter-active{opacity:1;}
+.view-animate.ng-leave{opacity:1;}
+.view-animate.ng-leave-active{opacity:0;}
+
+.page {
+    position: absolute;
+    height:100%;
+    min-height: 500px;
+    top:0;
+    left:0;
+    width:auto;
+    height:100%;
+    white-space:nowrap;
+}
+
+.page_content {
+    width:auto;
+    height:100%;
+    position:absolute;
+    white-space:nowrap;
+}
+.main_head {font-size:22px;}
+.post_head {font-size:17px;}
+
+.posts_div {
+    height:auto;
+    width:100%;
+        
+        @include breakpoint($tablet) {
+            height:100%;
+            width:auto;
+        }
+}
+
+.wp-caption-text {
+    text-align:right; 
+    font-family:$nu;
+    font-size: 14px;
+}
+
+.mar_head {margin-left:200px;}
+
+.text_box { 
+    height:100%;
+    margin-right:50px;
+    overflow-y: hidden;
+}
+
+div[class^='pstog']{
+    display:inline-block;
+    vertical-align:top; 
+    z-index:1;
+    padding-right:22px;
+    top:15%;
+    height:70%;
+    position:relative;
+    margin-top:1px;
+    overflow:visible;
+    word-break:break-word;
+    white-space: normal;
+        @media (min-height: 1500px){height:1050px;} 
+
+        a {
+            font-family:$lor;
+            color:#22866d;
+            font-size:15px;
+                &:hover {color:#f2fb00;}
+         }
+}
+
+.wp-caption{height:100%;}
+
+[text-block]{
+  @include columns(400px);
+  @include column-gap(40px);
+  @include vendor-prefix(column-fill, auto);
+  @include vendor-prefix(column-span, all);    
+}
+
+[extamargin]{line-height:20px;}
+.specialps{height:15px;position:relative;clear: both;}
+
+.more { 
+    position:absolute; 
+    display:none;
+}
+
+.readmore{
+    position:absolute; 
+    cursor:pointer;
+    color:#843103;
+    height:auto;
+    overflow:hidden;
+    padding-right:10px;
+        &:hover{color:#cb0606;}
+}
+.german, .english{width:400px;}
+
+.marg_normal {margin-left: 30px;}
+.displaynone{display:none;}

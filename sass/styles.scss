@@ -1,0 +1,47 @@
+
+@import 'compass';
+@import 'breakpoint';
+@import "compass/css3";
+@import 'compass/reset';
+@import '_vars';
+@import '_mixins';
+@import '_root';
+@import '_menu';
+@import '_content';
+
+a {text-decoration:none; font-family:$nu; color:#000000; font-size:12px;} 
+a:active,a:hover,a:visited{outline:0}
+p {font-family:'Lora',serif; font-weight:400; font-size:15px;white-space:normal;}
+b {font-family:$nu;}
+br {line-height:200%;}
+li {list-style-type:none;}
+strong {font-weight:600 !important;}
+i, cite, em, var, address, dfn {font-style:italic;}
+del {text-decoration:none; line-height:100%;}
+img, iframe {position:relative; border:none; min-width:100%; max-width:100%; width:100%; display:block; height:100%;}
+IMG[src=''], IMG:not([src]) {opacity:0;display:none;}
+
+html {height: 100%;min-height: 100%;max-height: 100%;}
+body {
+    position:relative;
+    line-height:130%;
+    height:100%;
+    min-height:100%;
+    max-height:100%;
+    overflow-y:hidden;
+    overflow-x:auto;
+    color:#000000;
+        @media (min-height:1500px){position:absolute; top:15%;}
+}
+
+@-moz-document url-prefix() {
+    html {overflow-y:inherit;}
+    body {overflow-x:scroll;}
+    iframe { z-index:-1;}
+}
+
+::-webkit-scrollbar {
+    height:0px;
+    width:0px;
+    background:#ffffff;
+}

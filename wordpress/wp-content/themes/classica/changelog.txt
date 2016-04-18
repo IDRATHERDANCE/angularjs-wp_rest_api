@@ -1,0 +1,111 @@
+*** Classica Changelog ***
+
+06 Jan 2012 - Version 1.2.2
+
+	* functions.php 
+		- use wp_enqueue_scripts to load scripts
+		- updated validation plugin to v1.9
+	* portfolio-meta.php - fix video settings display
+	* style.css - update version number
+	* widget-tweets.php - updated to allow multiple instances
+	
+	ADDED:
+	* twitter.js
+
+19 Sept 2011 - Version 1.2.1
+
+	* tinymce/plugin.js - Fixed shortcode image URL
+	* tinymce/config.php - Fixed shortcode bug
+	* template-contact.php - Fixed bug
+	* style.css - Slider flicker fix
+	* template-portfolio.php - Fixed filtering bug
+	* js/jquery.custom.js - Fixed filtering bug
+	* functions/theme-shortcodes.php - Tabs now support multiple instances
+	
+05 Aug 2011 - Version 1.2
+	
+	* admin/admin-interface.php - Updated HTML
+	* admin/admin-styles.css - Updated styling
+	* functions/theme-shortcodes.php - Minor bug fixes
+	* functions/theme-functions.php - Removed unnecessary functions
+	* functions/theme-options.php - New option notes
+	* functions/custom-fields.php - Minor bug fixes
+	* functions/widget-flickr.php - Added type attribute
+	* functions/widget-video.php - Added type attribute
+	* functions/widget-tweets.php - New code
+	* functions/widget-blog.php - Added type attribute
+	* functions.php - Updated file paths, removed unnecessary image sizes
+	* style.css - Added gallery styling
+	* template-home.php - Fixed blog link
+	* single-portfolio.php - Fixed getimagesize bug
+	* comments.php - Fixed typo
+	* template-portfolio.php - Skill types now support any characters
+	
+	* MOVED admin/theme-functions.php to functions/ directory
+	* MOVED admin/theme-options.php to functions/ directory
+	
+	* ADDED tinymce/
+	
+	* REMOVED functions/tinymce/
+	* REMOVED functions/cache/
+	
+30 Jun 2011 - Version 1.1.4
+
+	* template-contact.php - Fixed name field appearing twice
+	* functions.php - Amended related posts function
+	* single-portfolio.php - Amended related posts areas
+
+20 Jun 2011 - Version 1.1.3
+
+	*** IMPORTANT ***
+	
+	When updating to 1.1.3, ensure to re-save your theme options and take care when choosing the
+	blog and portfolio page options which are located in Theme Options > Homepage Settings.
+
+	*** Files Added ***
+	* css/shortcodes.css - Holds new shortcode styling
+	* js/jquery.shortcodes.js - Javascript for new shortcodes
+	* js/jquery-ui-1.8.5.custom.min.js - jQuery UI
+	* images/shortcodes/ - Images for new shortcodes
+	* functions/cache/ - Needed for the updated twitter widget
+	
+	*** File Changes ***
+	* admin/admin-interface.php - Updated a few options for better performance
+	* admin/theme-options.php - Changed a few options for better performance
+	* admin/admin-functions.php - Added relativeTime function
+	* functions/theme-shortcodes.php - Added buttons, tabs, toggles and alerts
+	* functions/tinymce/tinymce.js - Updated to support new shortcodes
+	* functions/widget-tweets.php - Now caches tweets every 10 mins to save load time
+	* js/jquery.custom.js - Fixed a minor bug with portfolio filter
+	* functions.php - Fixes
+	* index.php - Fixes
+	* single.php - Fixes
+	* template-portfolio.php - Fixes
+	* single-portfolio.php - Fixes
+	* template-home.php - Fixes
+	
+09 Feb 2011 - Version 1.1.2
+
+	* /js/jquery.custom.js - Revamped the portfolio filtering function
+	* /functions.php - Updated Class Portfolio_Walker to support multiple category filtering
+	* /template-portfolio.php - Updated to allow multiple category filtering
+
+03 Feb 2011 - Version 1.1.1
+
+	* /js/jquery.custom.js - Fixed portfolio multiple word filtering bug
+
+30 Jan 2011 - Version 1.1
+
+	* /admin/* - JS Bug fixes, new options, styling changes
+	* functions.php - Set options to true
+	* /functions/portfolio-meta.php - Added video meta boxes
+	* template-home.php - Update welcome message option
+	* template-portfolio.php - Added lightbox options
+	* template-contact.php - Bug fix
+	* single-portfolio.php - Added video support
+	* /includes/portfolio-video.php - Added video output
+	* style.css - Added video styling
+
+24 Jan 2011 - Version 1.0
+	
+	* First Release

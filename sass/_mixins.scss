@@ -1,0 +1,27 @@
+// mixin for vendor prefixes
+@mixin vendor-prefix($name, $argument) {
+  -webkit-#{$name}: #{$argument};
+  -ms-#{$name}: #{$argument};
+  -moz-#{$name}: #{$argument};
+  -o-#{$name}: #{$argument};
+  #{$name}: #{$argument};
+}
+// mixin for css3 calc
+@mixin calc($name, $value) {
+  #{$name}: -webkit-calc(#{$value});
+  #{$name}: -ms-calc(#{$value});
+  #{$name}: -moz-calc(#{$value});
+  #{$name}: -o-calc(#{$value});
+  #{$name}: calc(#{$value});
+}
+
+@mixin vendor-arg-prefix($name, $arg, $value) {
+  -webkit-#{$name}: #{$arg}(#{$value});
+  -ms-#{$name}: #{$arg}(#{$value});
+  -moz-#{$name}: #{$arg}(#{$value});
+  -o-#{$name}: #{$arg}(#{$value});
+  #{$name}: #{$arg}(#{$value});
+}
+
+
+
