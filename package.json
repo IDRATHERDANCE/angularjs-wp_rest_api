@@ -1,0 +1,30 @@
+{
+  "name": "angularjs_wp_rest_api",
+  "version": "1.0.0",
+  "description": "A project with angulal in the front-end built on wp rest api",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IDRATHERDANCE/angularjs_wp_rest_api"
+  },
+  "keywords": [
+    "[\"angular\"",
+    "\"wp",
+    "rest",
+    "api\"",
+    "\"angular",
+    "wordpress\"]"
+  ],
+  "author": "IDRATHERDANCE",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IDRATHERDANCE/angularjs_wp_rest_api/issues"
+  },
+  "homepage": "https://github.com/IDRATHERDANCE/angularjs_wp_rest_api"
+}
