@@ -1,0 +1,146 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'gulp',
+1 verbose cli   '--save-dev',
+1 verbose cli   'agular' ]
+2 info using npm@3.8.3
+3 info using node@v5.10.1
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData gulp@^3.9.1
+8 silly fetchPackageMetaData agular
+9 silly fetchNamedPackageData gulp
+10 silly mapToRegistry name gulp
+11 silly mapToRegistry using default registry
+12 silly mapToRegistry registry https://registry.npmjs.org/
+13 silly mapToRegistry data Result {
+13 silly mapToRegistry   raw: 'gulp',
+13 silly mapToRegistry   scope: null,
+13 silly mapToRegistry   name: 'gulp',
+13 silly mapToRegistry   rawSpec: '',
+13 silly mapToRegistry   spec: 'latest',
+13 silly mapToRegistry   type: 'tag' }
+14 silly mapToRegistry uri https://registry.npmjs.org/gulp
+15 silly fetchNamedPackageData agular
+16 silly mapToRegistry name agular
+17 silly mapToRegistry using default registry
+18 silly mapToRegistry registry https://registry.npmjs.org/
+19 silly mapToRegistry data Result {
+19 silly mapToRegistry   raw: 'agular',
+19 silly mapToRegistry   scope: null,
+19 silly mapToRegistry   name: 'agular',
+19 silly mapToRegistry   rawSpec: '',
+19 silly mapToRegistry   spec: 'latest',
+19 silly mapToRegistry   type: 'tag' }
+20 silly mapToRegistry uri https://registry.npmjs.org/agular
+21 verbose request uri https://registry.npmjs.org/agular
+22 verbose request no auth needed
+23 info attempt registry request try #1 at 3:37:51 PM
+24 verbose request id d80eeb6c811155d9
+25 http request GET https://registry.npmjs.org/agular
+26 verbose request uri https://registry.npmjs.org/gulp
+27 verbose request no auth needed
+28 info attempt registry request try #1 at 3:37:51 PM
+29 verbose etag "48VLO54DQC224RQBINZQ0FZGR"
+30 http request GET https://registry.npmjs.org/gulp
+31 http 304 https://registry.npmjs.org/gulp
+32 verbose headers { date: 'Tue, 19 Apr 2016 13:37:51 GMT',
+32 verbose headers   via: '1.1 varnish',
+32 verbose headers   'cache-control': 'max-age=300',
+32 verbose headers   etag: '"48VLO54DQC224RQBINZQ0FZGR"',
+32 verbose headers   age: '188',
+32 verbose headers   connection: 'keep-alive',
+32 verbose headers   'x-served-by': 'cache-ams4132-AMS',
+32 verbose headers   'x-cache': 'HIT',
+32 verbose headers   'x-cache-hits': '5',
+32 verbose headers   'x-timer': 'S1461073071.371169,VS0,VE0',
+32 verbose headers   vary: 'Accept-Encoding' }
+33 silly get cb [ 304,
+33 silly get   { date: 'Tue, 19 Apr 2016 13:37:51 GMT',
+33 silly get     via: '1.1 varnish',
+33 silly get     'cache-control': 'max-age=300',
+33 silly get     etag: '"48VLO54DQC224RQBINZQ0FZGR"',
+33 silly get     age: '188',
+33 silly get     connection: 'keep-alive',
+33 silly get     'x-served-by': 'cache-ams4132-AMS',
+33 silly get     'x-cache': 'HIT',
+33 silly get     'x-cache-hits': '5',
+33 silly get     'x-timer': 'S1461073071.371169,VS0,VE0',
+33 silly get     vary: 'Accept-Encoding' } ]
+34 verbose etag https://registry.npmjs.org/gulp from cache
+35 verbose get saving gulp to /Users/ikivik/.npm/registry.npmjs.org/gulp/.cache.json
+36 verbose correctMkdir /Users/ikivik/.npm correctMkdir not in flight; initializing
+37 http 404 https://registry.npmjs.org/agular
+38 verbose headers { 'content-type': 'application/json',
+38 verbose headers   'cache-control': 'max-age=0',
+38 verbose headers   'content-length': '2',
+38 verbose headers   'accept-ranges': 'bytes',
+38 verbose headers   date: 'Tue, 19 Apr 2016 13:37:52 GMT',
+38 verbose headers   via: '1.1 varnish',
+38 verbose headers   age: '0',
+38 verbose headers   connection: 'keep-alive',
+38 verbose headers   'x-served-by': 'cache-ams4128-AMS',
+38 verbose headers   'x-cache': 'MISS',
+38 verbose headers   'x-cache-hits': '0',
+38 verbose headers   'x-timer': 'S1461073071.368355,VS0,VE700',
+38 verbose headers   vary: 'Accept-Encoding' }
+39 silly get cb [ 404,
+39 silly get   { 'content-type': 'application/json',
+39 silly get     'cache-control': 'max-age=0',
+39 silly get     'content-length': '2',
+39 silly get     'accept-ranges': 'bytes',
+39 silly get     date: 'Tue, 19 Apr 2016 13:37:52 GMT',
+39 silly get     via: '1.1 varnish',
+39 silly get     age: '0',
+39 silly get     connection: 'keep-alive',
+39 silly get     'x-served-by': 'cache-ams4128-AMS',
+39 silly get     'x-cache': 'MISS',
+39 silly get     'x-cache-hits': '0',
+39 silly get     'x-timer': 'S1461073071.368355,VS0,VE700',
+39 silly get     vary: 'Accept-Encoding' } ]
+40 silly fetchPackageMetaData Error: Registry returned 404 for GET on https://registry.npmjs.org/agular
+40 silly fetchPackageMetaData     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+40 silly fetchPackageMetaData     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:242:14)
+40 silly fetchPackageMetaData     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+40 silly fetchPackageMetaData     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:199:22)
+40 silly fetchPackageMetaData     at emitTwo (events.js:100:13)
+40 silly fetchPackageMetaData     at Request.emit (events.js:185:7)
+40 silly fetchPackageMetaData     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1036:10)
+40 silly fetchPackageMetaData     at emitOne (events.js:95:20)
+40 silly fetchPackageMetaData     at Request.emit (events.js:182:7)
+40 silly fetchPackageMetaData     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:963:12)
+40 silly fetchPackageMetaData  error for agular { [Error: Registry returned 404 for GET on https://registry.npmjs.org/agular] pkgid: 'agular', statusCode: 404, code: 'E404' }
+41 silly rollbackFailedOptional Starting
+42 silly rollbackFailedOptional Finishing
+43 silly runTopLevelLifecycles Starting
+44 silly runTopLevelLifecycles Finishing
+45 silly install printInstalled
+46 verbose stack Error: Registry returned 404 for GET on https://registry.npmjs.org/agular
+46 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+46 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:242:14)
+46 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+46 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:199:22)
+46 verbose stack     at emitTwo (events.js:100:13)
+46 verbose stack     at Request.emit (events.js:185:7)
+46 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1036:10)
+46 verbose stack     at emitOne (events.js:95:20)
+46 verbose stack     at Request.emit (events.js:182:7)
+46 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:963:12)
+47 verbose statusCode 404
+48 verbose pkgid agular
+49 verbose cwd /Users/ikivik/Desktop/pro/angularjs_wp_rest_api
+50 error Darwin 15.2.0
+51 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "gulp" "--save-dev" "agular"
+52 error node v5.10.1
+53 error npm  v3.8.3
+54 error code E404
+55 error 404 Registry returned 404 for GET on https://registry.npmjs.org/agular
+56 error 404
+57 error 404 'agular' is not in the npm registry.
+58 error 404 You should bug the author to publish it (or use the name yourself!)
+59 error 404 Note that you can also install from a
+60 error 404 tarball, folder, http url, or git url.
+61 verbose exit [ 1, true ]

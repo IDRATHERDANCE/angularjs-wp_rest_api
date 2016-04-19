@@ -1,3 +1,5 @@
+
+
 var WpApp=angular.module('WpApp', ['ngRoute', 'ngAnimate', 'ngResource', 'ngSanitize', 'ngLocationUpdate']);
 ///////////////////////////////////////////////// configure routs ////////////////////////////////////////////////////////////
 WpApp.config(['$routeProvider','$locationProvider','$httpProvider', function($routeProvider, $locationProvider, $httpProvider){
