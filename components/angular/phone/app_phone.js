@@ -1,20 +1,17 @@
 
-var WpApp = angular.module('WpApp', ['ngRoute', 'ngAnimate', 'ngResource', 'ngSanitize', 'ngLocationUpdate'])
-
-
-.config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider)
+WpApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider)
 {
     $routeProvider
     .when('/', {
-        templateUrl: '/part/home.html',
+        templateUrl: 'builds/development/part/home.html',
         controller: 'routCtrl'
     })
     .when('/:page', {
-        templateUrl: '/part/page.html',
+        templateUrl: 'builds/development/part/page.html',
         controller: 'routCtrl'
     })  
      .when('/:page/:post', {
-         templateUrl: '/part/page.html',
+         templateUrl: 'builds/development/part/page.html',
         controller: 'routCtrl'
     })  
     .otherwise({

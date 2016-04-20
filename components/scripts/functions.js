@@ -151,17 +151,7 @@ var phone_menu_home=function(elem, num_index, height_p, proj_name){
                  elem.find('a').attr('href', proj_name);
                  });
 };
-////////////////////// check for ie version /////////////////////
-var GetIEVersion=function(){
-  var sAgent = window.navigator.userAgent,
-      Idx = sAgent.indexOf("MSIE");
-  if (Idx > 0) 
-    return parseInt(sAgent.substring(Idx+ 5, sAgent.indexOf(".", Idx)));
-  else if (!!navigator.userAgent.match(/Trident\/7\./)) 
-    return 11;
-  else
-    return 0;
-};
+
 ////////////////////// remember the language on route change /////////////////////
 var route_language_change=function(element){
          if($('.change_language').text()==='de'){

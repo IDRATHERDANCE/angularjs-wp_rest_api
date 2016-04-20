@@ -150,67 +150,32 @@ WpApp.service('menuCurrentPhone', function($location, mainData){
     });
   }
 });
-///////////////////////////////////////////////// configure routs ////////////////////////////////////////////////////////////
-WpApp.config(['$routeProvider','$locationProvider','$httpProvider', function($routeProvider, $locationProvider, $httpProvider){
-    $routeProvider
-    .when('/', {
-        templateUrl:'builds/development/part/page.html',
-        controller:'routCtrl'
-    })
-   .when('/:page', {
-        templateUrl:'builds/development/part/page.html',
-        controller:'routCtrl'
-    })  
-      .when('/:page/:post', {
-        templateUrl:'builds/development/part/page.html',
-        controller:'routCtrl'
-    })
-    .otherwise({
-         redirectTo:'/'
-       });
-     $locationProvider.html5Mode(true).hashPrefix('!');
-}]);
-///////////// controller that puts out content onto scope as a single HTML string assabled in services and functions ////////////
-////////////on separate files, i chose this method over ng-repeat because it's much faster /////////////////////////////////////
-WpApp.controller('routCtrl', function($scope, $rootScope, $location, menuData, contentData){
-    // get html string from a service and put it ona the scope
-    menuData.getMenuItems().then(function(data){
-        $rootScope.menuHTML=data;
-    });
-    contentData.getContent().then(function(data){
-        $scope.contentHTML=data;
-     });
-            // menu animation class distribution
-            if($location.path()==='/'){
-                $rootScope.homeclass=true;
-             }
-             else{
-                 $rootScope.homeclass=false;
-             } 
-});
-
 /////////////////////// puts out menu html from a string //////////////////////
 WpApp.directive('menu', function($compile){
-  return function(scope, ele, attrs){
-      scope.$watch(attrs.menu, function(html){
+  return{
+    link:function(scope, ele, attrs){
+      scope.$watch(attrs.menu,function(html){
         ele.html(html);
         $compile(ele.contents())(scope);
       });
     }
+  };
 });
 //////////////////////// puts out content html from a string //////////////////////
 WpApp.directive('wholeContent', function($compile){
-  return function(scope, ele, attrs){
+  return{
+    link:function(scope, ele, attrs){
       scope.$watch(attrs.wholeContent, function(html){
         ele.html(html);
         $compile(ele.contents())(scope);
       });
     }
- });
+  };
+});
 //////////////////////// hover on homepage /////////////////////////////////
-WpApp.directive("menuItemsHover", function($location){
+WpApp.directive("menuItemsHover", function(){
   return function(scope, element, attrs){
-    if($location.url()=='/'){
+    if(location.pathname=='/'){
         element.bind('mouseenter', function(event){
             element.parent().prev().children().attr('src', attrs.menuItemsHover)
         });
@@ -223,7 +188,7 @@ WpApp.directive("menuItemsHover", function($location){
 ////////////////////////// adds class to first element in post or page that gives it extra left margin ////////////////////////
 WpApp.directive("extraMargin", function(){
    return function(scope, element, attrs){
-                if(element.find('.main_head')){
+                if(element.find('.main_head').length!=0){
                     element.parent().addClass('mar_head');
                 }
                 else{
@@ -232,11 +197,11 @@ WpApp.directive("extraMargin", function(){
             }
 });
 ////////////////////////// remove spinner after data is loaded ////////////////////////////////////////////////
-WpApp.directive('spinnerGone', function($timeout, mainData){
-    return function(scope, element, attrs){ 
+WpApp.directive('spinnerGone', function($compile, $timeout, mainData){
+    return function(scope, element, attrs){
         mainData.responseFunction(function(data){
             }).then(function(res){ 
-                $timeout(function(){element.addClass('displaynone');}, 0);
+         $timeout(function(){element.addClass('displaynone');}, 0);
             });  
     }
  });
@@ -251,7 +216,7 @@ WpApp.directive("singleBlock", function(){
            }
                 element.find('a').attr('target', '_blank');
                     if(element.find('img').parent().hasClass('more')){
-                       element.find('img').unwrap();
+                        element.find('img').unwrap();
                     }
            }
 });
@@ -284,14 +249,14 @@ WpApp.directive('iframeScroll', function($window, $timeout){
         var window=angular.element($window);
         if(navigator.userAgent.toLowerCase().indexOf('firefox')>-1){
             window.bind('scroll', function(){
-                $timeout.cancel($.data(this, 'scrollTimer'));
-                    $.data(this, 'scrollTimer', $timeout(function(){
-                        element.bind('mousemove', function(){
+                 $timeout.cancel($.data(this, 'scrollTimer'));
+                    $.data(this,'scrollTimer', $timeout(function(){
+                        element.bind ('mousemove', function(){
                             element.find('iframe').css('z-index', 1);
                         });
                         var movementTimer=null;
                         element.bind('mousemove', function(){
-                            $timeout.cancel(movementTimer);
+                             $timeout.cancel(movementTimer);
                                 movementTimer=$timeout(function(){
                                     element.find('iframe').css('z-index', -1);
                                 }, 1500);
@@ -326,7 +291,7 @@ WpApp.directive('imgFix', function($window){
     }
 });
 ////////////////////////// text box css, track height and number of lines and create more columns if necessary ////////////////////////
-WpApp.directive('textBlock', function($window, $timeout){
+WpApp.directive('textBlock', function($window){
     return function(scope, element){
         var w=angular.element($window),
             p_box=element.find('.english'),
@@ -344,21 +309,20 @@ WpApp.directive('textBlock', function($window, $timeout){
                         divi=rows_exist/rows_fit,
                         n_times=Math.ceil(divi);
                         if(n_times===0){n_times=1};
-                        scope.n_times=n_times; 
                         element.css({
                              'width':(n_times*400)+(n_times*40),
                              'max-width':(n_times*600)+(n_times*40),
                              'min-width':(n_times*400)+(n_times*40)
                         });
                 }, true); 
-        $timeout(function(){scope.$apply();},0);
+        setInterval(function(){scope.$apply();},0);
         w.bind('resize', function(){
             scope.$apply();
         });
         var count=0;
         $('.change_language').bind('click', function(){
           count+=1;  
-          count=count%2;
+         count=count%2;
          if(count===1){
             p_box=element.find('.german');  
             scope.$apply();
@@ -370,26 +334,56 @@ WpApp.directive('textBlock', function($window, $timeout){
         });
     }
 });
+
 ////////////////////////// language change ////////////////////////
-WpApp.directive("textLanguage", function(){
+WpApp.directive("textLanguage", function($location, $routeParams, $timeout){
    return function(scope, element, attrs){
        var spans=element.find('span'),
            heads=element.find('.main_head'),
            p_box=element.find('p');
            spans.css('text-decoration', 'none');
-           heads.insertBefore(heads.parent());
-           german_language_string(element);
-           route_language_change(element); 
+                if(element.find('.english').children().hasClass('main_head')===true){
+                           heads.insertBefore(heads.parent());
+                           german_language_stringIE(element);  
+                }
+           route_language_change(element);
                 var read_more=element.find('.readmore');
                     read_more.bind('click', function(){
-                      $(this).next().slideDown(1200, function(){
-                      $(this).contents().unwrap();
+                      read_more.parent().find('.more').slideDown(1200, function(){
+                         read_more.parent().find('.more').contents().unwrap();
                             scope.$apply();
                       });
                      read_more.slideUp(1200);
                      read_more.prev().slideUp(1200);
                    }); 
-   }
+         $timeout(function(){
+            var location=$location.url().slice(1).replace(/\/[^\/]+$/, ""),
+            el_text=element[0].childNodes[0].innerHTML.replace(/\s+/g, '-').toLowerCase(),
+            el_left=element[0].offsetLeft;  
+                // changes between two posts of the different pages
+                if($routeParams.post!=undefined){
+                  move_left($routeParams.post, el_text, el_left, 1000); 
+                }
+                // always start from left 0    
+                $('html, body').scrollLeft(0);
+            // on location change move slide page
+            scope.$on('$routeChangeStart', function(next, current){
+                if(location===current.params.page){
+                     if(current.params.post!==undefined){
+                      el_left=element[0].offsetLeft;
+                      $location.update_path(location+'/'+current.params.post, true);
+                      move_left(current.params.post, el_text, el_left, 0);
+                     }
+                      else{
+                        el_left=element[0].offsetLeft;
+                        $location.update_path(location, true);
+                        move_left(location, el_text, el_left, 0);
+                      }
+                }
+            });       
+       
+      },0);
+      }
 });
 ////////////////////////// language button ////////////////////////
 WpApp.directive("languageButton", function(){
@@ -398,7 +392,6 @@ WpApp.directive("languageButton", function(){
         element.bind('click', function(){ 
              count+=1;  
              count=count%2;
-             scope.count=count; 
              $('.english').each(function(){
                  if(count===1){
                     element.text('en');
@@ -420,44 +413,11 @@ WpApp.directive("languageButton", function(){
           }); 
     }
 });
-////////////////////////// sliding left and right of the page ////////////////////////////////////////
-WpApp.directive("menuAnimation", function($location, $routeParams, $timeout){
-   return function(scope, element, attrs){
-        $timeout(function(){
-                    scope.location=$location.url().slice(1).replace(/\/[^\/]+$/, "");
-                    scope.el_text=attrs.menuAnimation;
-                    scope.el_left=element.parent()[0].offsetLeft;
-                var el_text=scope.el_text,
-                    el_left=scope.el_left,
-                    location=scope.location;
-                // changes between two posts of the different pages
-                if($routeParams.post!=undefined){
-                  move_left($routeParams.post, el_text, el_left, 1000); 
-                }
-                // always start from left 0    
-                $('html, body').scrollLeft(0);
-            // on location change move slide page
-            scope.$on('$routeChangeStart', function(next, current){
-                if(location===current.params.page){
-                     if(current.params.post!==undefined){
-                      el_left=element.parent()[0].offsetLeft;
-                      $location.update_path(location+'/'+current.params.post, true);
-                      move_left(current.params.post, el_text, el_left, 0);
-                     }
-                      else{
-                        el_left=element.parent()[0].offsetLeft;
-                        $location.update_path(location, true);
-                        move_left(location, el_text, el_left, 0);
-                      }
-                }
-            });
-       }, 0);    
-    }
-});
-////////////////////////// adds margin on the last content box ////////////////////////////////////////////////
+////////////////////////// adds marin on the last content box ////////////////////////////////////////////////
 WpApp.directive('lastMargin', function($window){
     return function(scope, element, attr){
         var w=angular.element($window);
+        
         scope.getWindowDimensions=function(){
             return{'w':w.width()};
         };
