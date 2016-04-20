@@ -4,12 +4,20 @@ var WpApp=angular.module('WpApp', ['ngRoute', 'ngAnimate', 'ngResource', 'ngSani
 !function(n){"use strict";n.module("ngLocationUpdate",[]).run(["$route","$rootScope","$location",function(n,t,o){o.update_path=function(c,u){if(o.path()!=c){var a=n.current;t.$on("$locationChangeSuccess",function(){a&&(n.current=a,a=null)}),o.path(c),u||o.replace()}}}])}(window.angular);
 //////////////////////////// all providers for the controller and directives////////////////////////////
 WpApp.factory('mainData', function($http){
+    
+
+//   $http.jsonp('http://ninalieven.net/wordpress/wp-json/posts?type[]=page&type[]=post?callback=JSON_CALLBACK')
+//        .success(function(data){
+//            console.log(data);
+//        });      
+    
     return {
             responseFunction: function(){
-               return $http.get('http://ninalieven.net/wordpress/wp-json/posts?type[]=page&type[]=post', {cache:true}); 
+               return $http.get('data.json', {cache:true}); 
          }
     } 
  });
+//http://ninalieven.net/wordpress/wp-json/posts?type[]=page&type[]=post
 // take object and assemble the main menu string 
 WpApp.service('menuData', function(mainData){
   this.getMenuItems=function(){
@@ -155,15 +163,15 @@ WpApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function($
 {
     $routeProvider
     .when('/', {
-        templateUrl: 'builds/development/part/home.html',
+        templateUrl: '/part/home.html',
         controller: 'routCtrl'
     })
     .when('/:page', {
-        templateUrl: 'builds/development/part/page.html',
+        templateUrl: '/part/page.html',
         controller: 'routCtrl'
     })  
      .when('/:page/:post', {
-         templateUrl: 'builds/development/part/page.html',
+         templateUrl: '/part/page.html',
         controller: 'routCtrl'
     })  
     .otherwise({

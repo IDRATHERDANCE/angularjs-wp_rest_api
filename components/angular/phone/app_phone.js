@@ -3,15 +3,15 @@ WpApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function($
 {
     $routeProvider
     .when('/', {
-        templateUrl: 'builds/development/part/home.html',
+        templateUrl: '/part/home.html',
         controller: 'routCtrl'
     })
     .when('/:page', {
-        templateUrl: 'builds/development/part/page.html',
+        templateUrl: '/part/page.html',
         controller: 'routCtrl'
     })  
      .when('/:page/:post', {
-         templateUrl: 'builds/development/part/page.html',
+         templateUrl: '/part/page.html',
         controller: 'routCtrl'
     })  
     .otherwise({

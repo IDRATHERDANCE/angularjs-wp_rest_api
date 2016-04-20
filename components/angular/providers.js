@@ -1,11 +1,19 @@
 //////////////////////////// all providers for the controller and directives////////////////////////////
 WpApp.factory('mainData', function($http){
+    
+
+//   $http.jsonp('http://ninalieven.net/wordpress/wp-json/posts?type[]=page&type[]=post?callback=JSON_CALLBACK')
+//        .success(function(data){
+//            console.log(data);
+//        });      
+    
     return {
             responseFunction: function(){
-               return $http.get('http://ninalieven.net/wordpress/wp-json/posts?type[]=page&type[]=post', {cache:true}); 
+               return $http.get('data.json', {cache:true}); 
          }
     } 
  });
+//http://ninalieven.net/wordpress/wp-json/posts?type[]=page&type[]=post
 // take object and assemble the main menu string 
 WpApp.service('menuData', function(mainData){
   this.getMenuItems=function(){
