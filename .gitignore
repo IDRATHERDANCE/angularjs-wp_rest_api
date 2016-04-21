@@ -1,6 +1,6 @@
 .DS_Store
 node_modules
 .tmp
-/.sass-cache
+*/.sass-cache/
 wordpress
-/bower_components
+*/bower_components/
