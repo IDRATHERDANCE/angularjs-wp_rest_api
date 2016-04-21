@@ -1,4 +1,3 @@
-
 WpApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider)
 {
     $routeProvider
@@ -25,7 +24,7 @@ WpApp.controller('routCtrl', function($scope,$rootScope,$routeParams,$location,m
       $rootScope.menuPhoneHTML=data;
     });
     contentData.getContent().then(function(data){
-        $scope.contentHTML=data;
+      $scope.contentHTML=data;
      });
 });
 

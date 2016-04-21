@@ -40,7 +40,7 @@ WpApp.directive('iframe', function($window){
             imghi=element.find('iframe').attr('height');
         scope.getWindowDimensions=function(){
             return{
-                'ww':w.width()
+                'ww':w[0].innerWidth
                 };
         };
         scope.$watch(scope.getWindowDimensions, function(newValue, oldValue){

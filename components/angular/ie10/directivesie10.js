@@ -267,7 +267,7 @@ WpApp.directive('lastMargin', function($window){
         var w=angular.element($window);
         
         scope.getWindowDimensions=function(){
-            return{'w':w.width()};
+            return{'w':w[0].innerWidth};
         };
         scope.$watch(scope.getWindowDimensions, function(newValue, oldValue){
             if(element.children().last().children().hasClass('main_head')){

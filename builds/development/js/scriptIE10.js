@@ -1,18 +1,23 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 
+
+var angular = require('angular');
+var ngRoute = require('angular-route');
+var ngAnimate = require('angular-animate');
+var ngResource = require('angular-resource');
+var ngSanitize = require('angular-sanitize');
 //////////////////////////// define angular module ////////////////////////////
 var WpApp=angular.module('WpApp', ['ngRoute', 'ngAnimate', 'ngResource', 'ngSanitize', 'ngLocationUpdate']);
 !function(n){"use strict";n.module("ngLocationUpdate",[]).run(["$route","$rootScope","$location",function(n,t,o){o.update_path=function(c,u){if(o.path()!=c){var a=n.current;t.$on("$locationChangeSuccess",function(){a&&(n.current=a,a=null)}),o.path(c),u||o.replace()}}}])}(window.angular);
 //////////////////////////// all providers for the controller and directives////////////////////////////
-WpApp.factory('mainData', function($http){
+WpApp.factory('mainData', ['$http', function($http){
     return {
             responseFunction: function(){
                return $http.get('http://ninalieven.net/wordpress/wp-json/posts?type[]=page&type[]=post', {cache:true}); 
          }
     } 
- });
+ }]);
 // take object and assemble the main menu string 
-WpApp.service('menuData', function(mainData){
+WpApp.service('menuData', ['mainData', function(mainData){
   this.getMenuItems=function(){
     return mainData.responseFunction(function(data){
     }).then(function(res){  
@@ -62,9 +67,9 @@ WpApp.service('menuData', function(mainData){
                 return pages_string;
     });
   }
-});
+}]);
 // make an onbject to feed into a function that assambles content HTML in a sigle string
-WpApp.service('contentData', function($location, mainData){
+WpApp.service('contentData', ['$location', 'mainData', function($location, mainData){
      this.getContent=function(){
             return mainData.responseFunction(function(data){
             }).then(function(res){
@@ -109,9 +114,9 @@ WpApp.service('contentData', function($location, mainData){
                  return '<div class="page_content" last-margin>'+big_string+'</div>';
              }); // end then
     };  // end getContent
-}); // end service
+}]); // end service
 // assemble HTML menu string for phones
-WpApp.service('menuDataPhone', function(mainData){
+WpApp.service('menuDataPhone', ['mainData', function(mainData){
   this.getMenuItemsPhone=function(){
     return mainData.responseFunction(function(data) {
     }).then(function(res){
@@ -129,9 +134,9 @@ pages_string+='<div phone-menu-animation phone-menu-css="' + k +'" menu-item-nam
             return pages_string;
     });
   }
-});
+}]);
 // send the index of the current menu item to the directive
-WpApp.service('menuCurrentPhone', function($location, mainData){
+WpApp.service('menuCurrentPhone', ['$location', 'mainData', function($location, mainData){
   this.getCurrentMenuItemPhone=function(){
     return mainData.responseFunction(function(data) {
     }).then(function(res){
@@ -150,7 +155,7 @@ WpApp.service('menuCurrentPhone', function($location, mainData){
             return cur;
     });
   }
-});
+}]);
 /////////////////////// puts out menu html from a string //////////////////////
 WpApp.directive('menu', function($compile){
   return{
@@ -420,7 +425,7 @@ WpApp.directive('lastMargin', function($window){
         var w=angular.element($window);
         
         scope.getWindowDimensions=function(){
-            return{'w':w.width()};
+            return{'w':w[0].innerWidth};
         };
         scope.$watch(scope.getWindowDimensions, function(newValue, oldValue){
             if(element.children().last().children().hasClass('main_head')){
@@ -432,6 +437,7 @@ WpApp.directive('lastMargin', function($window){
         });
     }
 });
+var $ = require('jquery');
 ////// function that goes through big data object from a service and depending on type and location and assamles it as a string /////
 var content_string_assemble=function(pagectt, loc){
      var ps_group_head=[],
@@ -537,7 +543,7 @@ var head_index=[];
     return g_h;
 };
 ////////////////////// function that slides view to posts within one page ///////////////////////////
-var move_left=function(where, text, left, delay){console.log(where, text, left, delay)
+var move_left=function(where, text, left, delay){
      if(text===where){
           if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
               $('body').delay(delay).animate({scrollLeft:left-200}, 1000);
@@ -655,6 +661,7 @@ var german_language_stringIE=function(element){
             }
         }                                         
  };
+var jQuery = require('jquery');
 /*! Copyright (c) 2011 Brandon Aaron (http://brandonaaron.net)
  * Licensed under the MIT License (LICENSE.txt).
  *
@@ -739,5 +746,3 @@ function handler(event) {
 }
 
 })(jQuery);
-
-},{}]},{},[1])

@@ -1,13 +1,13 @@
 //////////////////////////// all providers for the controller and directives////////////////////////////
-WpApp.factory('mainData', function($http){
+WpApp.factory('mainData', ['$http', function($http){
     return {
             responseFunction: function(){
                return $http.get('http://ninalieven.net/wordpress/wp-json/posts?type[]=page&type[]=post', {cache:true}); 
          }
     } 
- });
+ }]);
 // take object and assemble the main menu string 
-WpApp.service('menuData', function(mainData){
+WpApp.service('menuData', ['mainData', function(mainData){
   this.getMenuItems=function(){
     return mainData.responseFunction(function(data){
     }).then(function(res){  
@@ -57,9 +57,9 @@ WpApp.service('menuData', function(mainData){
                 return pages_string;
     });
   }
-});
+}]);
 // make an onbject to feed into a function that assambles content HTML in a sigle string
-WpApp.service('contentData', function($location, mainData){
+WpApp.service('contentData', ['$location', 'mainData', function($location, mainData){
      this.getContent=function(){
             return mainData.responseFunction(function(data){
             }).then(function(res){
@@ -104,9 +104,9 @@ WpApp.service('contentData', function($location, mainData){
                  return '<div class="page_content" last-margin>'+big_string+'</div>';
              }); // end then
     };  // end getContent
-}); // end service
+}]); // end service
 // assemble HTML menu string for phones
-WpApp.service('menuDataPhone', function(mainData){
+WpApp.service('menuDataPhone', ['mainData', function(mainData){
   this.getMenuItemsPhone=function(){
     return mainData.responseFunction(function(data) {
     }).then(function(res){
@@ -124,9 +124,9 @@ pages_string+='<div phone-menu-animation phone-menu-css="' + k +'" menu-item-nam
             return pages_string;
     });
   }
-});
+}]);
 // send the index of the current menu item to the directive
-WpApp.service('menuCurrentPhone', function($location, mainData){
+WpApp.service('menuCurrentPhone', ['$location', 'mainData', function($location, mainData){
   this.getCurrentMenuItemPhone=function(){
     return mainData.responseFunction(function(data) {
     }).then(function(res){
@@ -145,4 +145,4 @@ WpApp.service('menuCurrentPhone', function($location, mainData){
             return cur;
     });
   }
-});
+}]);

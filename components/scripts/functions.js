@@ -1,3 +1,4 @@
+var $ = require('jquery');
 ////// function that goes through big data object from a service and depending on type and location and assamles it as a string /////
 var content_string_assemble=function(pagectt, loc){
      var ps_group_head=[],
@@ -103,7 +104,7 @@ var head_index=[];
     return g_h;
 };
 ////////////////////// function that slides view to posts within one page ///////////////////////////
-var move_left=function(where, text, left, delay){console.log(where, text, left, delay)
+var move_left=function(where, text, left, delay){
      if(text===where){
           if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
               $('body').delay(delay).animate({scrollLeft:left-200}, 1000);

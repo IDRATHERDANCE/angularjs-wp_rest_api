@@ -1,36 +1,36 @@
 /////////////////////// puts out menu html from a string //////////////////////
-WpApp.directive('menu', function($compile){
+WpApp.directive('menu', ['$compile', function($compile){
   return function(scope, ele, attrs){
       scope.$watch(attrs.menu, function(html){
         ele.html(html);
         $compile(ele.contents())(scope);
       });
     }
-});
+}]);
 //////////////////////// puts out content html from a string //////////////////////
-WpApp.directive('wholeContent', function($compile){
+WpApp.directive('wholeContent', ['$compile', function($compile){
   return function(scope, ele, attrs){
       scope.$watch(attrs.wholeContent, function(html){
         ele.html(html);
         $compile(ele.contents())(scope);
       });
     }
- });
+ }]);
 //////////////////////// hover on homepage /////////////////////////////////
-WpApp.directive("menuItemsHover", function($location){
+WpApp.directive("menuItemsHover", ['$location', function($location){
   return function(scope, element, attrs){
     if($location.url()=='/'){
         element.bind('mouseenter', function(event){
-            element.parent().prev().children().attr('src', attrs.menuItemsHover)
+            $(element.parent()[0].previousElementSibling.childNodes[0]).attr('src', attrs.menuItemsHover)
         });
         element.bind('mouseleave', function(event){
-            element.parent().prev().children().removeAttr('src')
+            $(element.parent()[0].previousElementSibling.childNodes[0]).removeAttr('src')
         });
     }
   }
-});
+}]);
 ////////////////////////// adds class to first element in post or page that gives it extra left margin ////////////////////////
-WpApp.directive("extraMargin", function(){
+WpApp.directive("extraMargin", [function(){
    return function(scope, element, attrs){
                 if(element.find('.main_head')){
                     element.parent().addClass('mar_head');
@@ -39,18 +39,18 @@ WpApp.directive("extraMargin", function(){
                     element.parent().addClass('marg_normal');
                 }
             }
-});
+}]);
 ////////////////////////// remove spinner after data is loaded ////////////////////////////////////////////////
-WpApp.directive('spinnerGone', function($timeout, mainData){
+WpApp.directive('spinnerGone', ['$timeout', 'mainData', function($timeout, mainData){
     return function(scope, element, attrs){ 
         mainData.responseFunction(function(data){
             }).then(function(res){ 
                 $timeout(function(){element.addClass('displaynone');}, 0);
             });  
     }
- });
+ }]);
 ////////////////////////// single content block text fix some wordpress inserts ////////////////////////
-WpApp.directive("singleBlock", function(){
+WpApp.directive("singleBlock", [function(){
    return function(scope, element, attrs){
          if(element.find('p').text()===''){
                 element.find('p').remove();
@@ -63,32 +63,35 @@ WpApp.directive("singleBlock", function(){
                        element.find('img').unwrap();
                     }
            }
-});
+}]);
 ////////////////////////// fix the width of the iframe ////////////////////////
-WpApp.directive('iframe', function($window){
+WpApp.directive('iframe', ['$window', function($window){
     return function(scope, element){
         var w=angular.element($window),
             imgwi=element.find('iframe').attr('width'),
             imghi=element.find('iframe').attr('height');
         scope.getWindowDimensions=function(){
-            return{'h':w.height()};
+            return{'h':w[0].innerHeight};
         };
         scope.$watch(scope.getWindowDimensions, function(newValue, oldValue){
-            if(newValue.h<1500){
+            if((newValue.h<1500)&&(newValue.h>600)){
                 var imgparwi=((newValue.h*0.7)*imgwi)/imghi;
+                }
+            else if(newValue.h<600){
+                var imgparwi=((600*0.7)*imgwi)/imghi;
+                }
+            else if(newValue.h>1500){
+                var imgparwi=((1500*0.7)*imgwi)/imghi;   
             }
-            else{
-                var imgparwi=((1500*0.7)*imgwi)/imghi;
-            }
-             element.css('width', imgparwi+3);
+              element.css('width', imgparwi+3);
         }, true);
         w.bind('resize', function(){
             scope.$apply();
         });
     }
-});
+}]);
 ////////////////////////// fix the scrolling over the iframe ////////////////////////
-WpApp.directive('iframeScroll', function($window, $timeout){
+WpApp.directive('iframeScroll', ['$window', '$timeout', function($window, $timeout){
     return function(scope, element){
         var window=angular.element($window);
         if(navigator.userAgent.toLowerCase().indexOf('firefox')>-1){
@@ -109,9 +112,9 @@ WpApp.directive('iframeScroll', function($window, $timeout){
             });
        }
     }
-});
+}]);
 ////////////////////////// fix the width of the image ////////////////////////////////////////////////
-WpApp.directive('imgFix', function($window){
+WpApp.directive('imgFix', ['$window', function($window){
     return function(scope, element){
         var w=angular.element($window),
             imgwi=element.find('img').attr('width'),
@@ -120,10 +123,13 @@ WpApp.directive('imgFix', function($window){
             return{'h':w.height()};
         };
         scope.$watch(scope.getWindowDimensions, function(newValue, oldValue){
-            if(newValue.h<1500){
+            if((newValue.h<1500)&&(newValue.h>600)){
                 var imgparwi=(((newValue.h*0.7)*imgwi)/imghi)+22;
                 }
-            else{
+            else if(newValue.h<600){
+                var imgparwi=(((600*0.7)*imgwi)/imghi)+22;    
+                }
+            else if(newValue.h>1500){
                 var imgparwi=(((1500*0.7)*imgwi)/imghi)+22;    
             }
                 element.css('width', imgparwi);
@@ -133,9 +139,9 @@ WpApp.directive('imgFix', function($window){
             scope.$apply();
         });
     }
-});
+}]);
 ////////////////////////// text box css, track height and number of lines and create more columns if necessary ////////////////////////
-WpApp.directive('textBlock', function($window, $timeout){
+WpApp.directive('textBlock', ['$window', '$timeout', function($window, $timeout){
     return function(scope, element){
         var w=angular.element($window),
             p_box=element.find('.english'),
@@ -178,9 +184,9 @@ WpApp.directive('textBlock', function($window, $timeout){
             }
         });
     }
-});
+}]);
 ////////////////////////// language change ////////////////////////
-WpApp.directive("textLanguage", function(){
+WpApp.directive("textLanguage", [function(){
    return function(scope, element, attrs){
        var spans=element.find('span'),
            heads=element.find('.main_head'),
@@ -199,9 +205,9 @@ WpApp.directive("textLanguage", function(){
                      read_more.prev().slideUp(1200);
                    }); 
    }
-});
+}]);
 ////////////////////////// language button ////////////////////////
-WpApp.directive("languageButton", function(){
+WpApp.directive("languageButton", [function(){
    return function(scope, element, attrs){
     var count=0;
         element.bind('click', function(){ 
@@ -228,9 +234,9 @@ WpApp.directive("languageButton", function(){
                 });
           }); 
     }
-});
+}]);
 ////////////////////////// sliding left and right of the page ////////////////////////////////////////
-WpApp.directive("menuAnimation", function($location, $routeParams, $timeout){
+WpApp.directive("menuAnimation", ['$location', '$routeParams', '$timeout', function($location, $routeParams, $timeout){
    return function(scope, element, attrs){
         $timeout(function(){
                     scope.location=$location.url().slice(1).replace(/\/[^\/]+$/, "");
@@ -262,16 +268,16 @@ WpApp.directive("menuAnimation", function($location, $routeParams, $timeout){
             });
        }, 0);    
     }
-});
+}]);
 ////////////////////////// adds margin on the last content box ////////////////////////////////////////////////
-WpApp.directive('lastMargin', function($window){
+WpApp.directive('lastMargin', ['$window', function($window){
     return function(scope, element, attr){
         var w=angular.element($window);
         scope.getWindowDimensions=function(){
-            return{'w':w.width()};
+            return{'w':w[0].innerWidth};
         };
-        scope.$watch(scope.getWindowDimensions, function(newValue, oldValue){
-            if(element.children().last().children().hasClass('main_head')){
+        scope.$watch(scope.getWindowDimensions, function(newValue, oldValue){ 
+            if(element.children().last().children().hasClass('main_head')){ // $(element[0].childNodes[element[0].childNodes.lenght-1].childNodes[0]).hassClass('main_head')
               element.children().last().css('margin-right', newValue.w-660);  
             }
         }, true);
@@ -279,4 +285,4 @@ WpApp.directive('lastMargin', function($window){
             scope.$apply();
         });
     }
-});
+}]);

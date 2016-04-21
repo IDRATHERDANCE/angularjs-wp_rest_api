@@ -20,7 +20,7 @@ WpApp.config(['$routeProvider','$locationProvider','$httpProvider', function($ro
 }]);
 ///////////// controller that puts out content onto scope as a single HTML string assabled in services and functions ////////////
 ////////////on separate files, i chose this method over ng-repeat because it's much faster /////////////////////////////////////
-WpApp.controller('routCtrl', function($scope, $rootScope, $location, menuData, contentData){
+WpApp.controller('routCtrl', ['$scope', '$rootScope', '$location', 'menuData', 'contentData', function($scope, $rootScope, $location, menuData, contentData){
     // get html string from a service and put it ona the scope
     menuData.getMenuItems().then(function(data){
         $rootScope.menuHTML=data;
@@ -35,4 +35,4 @@ WpApp.controller('routCtrl', function($scope, $rootScope, $location, menuData, c
              else{
                  $rootScope.homeclass=false;
              } 
-});
+}]);

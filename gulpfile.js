@@ -7,6 +7,7 @@ var gulp = require('gulp'),
     guplif = require('gulp-if'),
     uglify = require('gulp-uglify'),
     uglifycss = require('gulp-uglifycss');
+    minifyHTML = require('gulp-minify-html');
     cors = function (req, res, next) {
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Access-Control-Allow-Headers', '*');
@@ -21,33 +22,27 @@ var env,
     jsSourcesIE10,
     sassSources,
     sassSources,
-    htmlSources,
     outputDir,
-    sassStyle,
     env = process.env.NODE_ENV || 'development';
 
 
 if (env==='development'){
     outputDir = 'builds/development/';
-//    sassStyle = 'expanded';
 } else {
     outputDir = 'builds/production/';
-//    sassStyle = 'compressed';
 }
-gutil.log(env, outputDir, sassStyle);
+
 
 jsSourcesRegular = ['components/angular/*.js', 'components/angular/regular/*.js', 'components/scripts/*.js', 'components/scripts/regular/*.js'];
 jsSourcesPhone = ['components/angular/*.js', 'components/angular/phone/*.js', 'components/scripts/*.js', 'components/scripts/phone/*.js'];
 jsSourcesIE10 = ['components/angular/*.js', 'components/angular/ie10/*.js', 'components/scripts/*.js', 'components/scripts/regular/*.js'];
 sassSources = ['components/sass/styles.scss', 'components/sass/styles_phone.scss'];
-htmlSources = [outputDir + 'index.html', outputDir + 'part/page.html'];
 
     gulp.task('sass', function(){
         gulp.src(sassSources)
             .pipe(compass({
                 sass: 'components/sass',
                 image: 'builds/production/images',
-//                style: sassStyle,
                 require: 'breakpoint'
             }))
             .pipe(guplif(env==='production', uglifycss()))
@@ -71,7 +66,8 @@ htmlSources = [outputDir + 'index.html', outputDir + 'part/page.html'];
     gulp.task('jsPhone', function(){
         gulp.src(jsSourcesPhone)
             .pipe(concat('scriptPhone.js'))
-            .pipe(browserify())
+      
+            .pipe(guplif(env==='production', uglify()))
             .pipe(gulp.dest(outputDir + 'js'))
             .pipe(connect.reload())
     });
@@ -79,16 +75,33 @@ htmlSources = [outputDir + 'index.html', outputDir + 'part/page.html'];
     gulp.task('jsIE10', function(){
         gulp.src(jsSourcesIE10)
             .pipe(concat('scriptIE10.js'))
-            .pipe(browserify())
+   
+            .pipe(guplif(env==='production', uglify()))
             .pipe(gulp.dest(outputDir + 'js'))
             .pipe(connect.reload())
     });
 
+    gulp.task('html', function(){
+         gulp.src('builds/development/*.html')
+         .pipe(guplif(env==='production', minifyHTML()))
+         .pipe(guplif(env==='production', gulp.dest(outputDir)))
+         .pipe(connect.reload())
+    });
+    
+    gulp.task('htmlPage', function(){
+         gulp.src('builds/development/part/*.html')
+         .pipe(guplif(env==='production', minifyHTML()))
+         .pipe(guplif(env==='production', gulp.dest(outputDir + 'part/')))
+         .pipe(connect.reload())
+    });
 
     gulp.task('watch', function(){
         gulp.watch('components/sass/*.scss', ['sass']);
         gulp.watch(jsSourcesRegular, ['js']);
-        gulp.watch(htmlSources, ['html']);
+        gulp.watch(jsSourcesPhone, ['jsPhone']);
+        gulp.watch(jsSourcesIE10, ['jsIE10']);
+        gulp.watch('builds/development/*.html', ['html']);
+        gulp.watch('builds/development/part/*.html', ['htmlPage']);
         
     });
 
@@ -102,14 +115,7 @@ htmlSources = [outputDir + 'index.html', outputDir + 'part/page.html'];
         })
     });
 
-    gulp.task('html', function(){
-         gulp.src(htmlSources)
-         .pipe(connect.reload())
-    });
-
-
-
-    gulp.task('default', ['html', 'sass', 'js', 'jsPhone', 'jsIE10', 'connect', 'watch']);
+    gulp.task('default', ['html', 'htmlPage', 'sass', 'js', 'jsPhone', 'jsIE10', 'connect', 'watch']);
 
 
 
