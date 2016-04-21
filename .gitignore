@@ -1,6 +1,6 @@
 .DS_Store
 node_modules
 .tmp
-/.sass-cache
+/Users/ikivik/desktop/pro/angularjs_wp_rest_api/.sass-cache
 wordpress
-/bower_components
+/Users/ikivik/desktop/pro/angularjs_wp_rest_api/bower_components
