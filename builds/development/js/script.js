@@ -271,13 +271,16 @@ WpApp.directive('iframe', ['$window', function($window){
             return{'h':w[0].innerHeight};
         };
         scope.$watch(scope.getWindowDimensions, function(newValue, oldValue){
-            if(newValue.h<1500){
+            if((newValue.h<1500)&&(newValue.h>600)){
                 var imgparwi=((newValue.h*0.7)*imgwi)/imghi;
+                }
+            else if(newValue.h<600){
+                var imgparwi=((600*0.7)*imgwi)/imghi;
+                }
+            else if(newValue.h>1500){
+                var imgparwi=((1500*0.7)*imgwi)/imghi;   
             }
-            else{
-                var imgparwi=((1500*0.7)*imgwi)/imghi;
-            }
-             element.css('width', imgparwi+3);
+              element.css('width', imgparwi+3);
         }, true);
         w.bind('resize', function(){
             scope.$apply();
@@ -314,13 +317,16 @@ WpApp.directive('imgFix', ['$window', function($window){
             imgwi=element.find('img').attr('width'),
             imghi=element.find('img').attr('height');
         scope.getWindowDimensions=function(){
-            return{'h':w[0].innerHeight};
+            return{'h':w.height()};
         };
         scope.$watch(scope.getWindowDimensions, function(newValue, oldValue){
-            if(newValue.h<1500){
+            if((newValue.h<1500)&&(newValue.h>600)){
                 var imgparwi=(((newValue.h*0.7)*imgwi)/imghi)+22;
                 }
-            else{
+            else if(newValue.h<600){
+                var imgparwi=(((600*0.7)*imgwi)/imghi)+22;    
+                }
+            else if(newValue.h>1500){
                 var imgparwi=(((1500*0.7)*imgwi)/imghi)+22;    
             }
                 element.css('width', imgparwi);

@@ -66,7 +66,7 @@ sassSources = ['components/sass/styles.scss', 'components/sass/styles_phone.scss
     gulp.task('jsPhone', function(){
         gulp.src(jsSourcesPhone)
             .pipe(concat('scriptPhone.js'))
-      
+            .pipe(browserify())
             .pipe(guplif(env==='production', uglify()))
             .pipe(gulp.dest(outputDir + 'js'))
             .pipe(connect.reload())
@@ -75,7 +75,7 @@ sassSources = ['components/sass/styles.scss', 'components/sass/styles_phone.scss
     gulp.task('jsIE10', function(){
         gulp.src(jsSourcesIE10)
             .pipe(concat('scriptIE10.js'))
-   
+            .pipe(browserify())
             .pipe(guplif(env==='production', uglify()))
             .pipe(gulp.dest(outputDir + 'js'))
             .pipe(connect.reload())

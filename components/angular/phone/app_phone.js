@@ -2,7 +2,7 @@ WpApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function($
 {
     $routeProvider
     .when('/', {
-        templateUrl: '/part/home.html',
+        templateUrl: '/part/page.html',
         controller: 'routCtrl'
     })
     .when('/:page', {
@@ -18,7 +18,7 @@ WpApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function($
        });
      $locationProvider.html5Mode(true).hashPrefix('!');
 }]);
-WpApp.controller('routCtrl', function($scope,$rootScope,$routeParams,$location,menuDataPhone,contentData){
+WpApp.controller('routCtrl', ['$scope','$rootScope','$routeParams','$location','menuDataPhone','contentData', function($scope,$rootScope,$routeParams,$location,menuDataPhone,contentData){
     // get html string from a service and put it ona the scope
     menuDataPhone.getMenuItemsPhone().then(function(data){
       $rootScope.menuPhoneHTML=data;
@@ -26,7 +26,7 @@ WpApp.controller('routCtrl', function($scope,$rootScope,$routeParams,$location,m
     contentData.getContent().then(function(data){
       $scope.contentHTML=data;
      });
-});
+}]);
 
 
 
