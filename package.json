@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/IDRATHERDANCE/angularjs_wp_rest_api.git"
+    "url": "https://github.com/IDRATHERDANCE/angularjs_wp-rest_api.git"
   },
   "keywords": [
     "[\"angular\"",
@@ -24,9 +24,9 @@
   "author": "IDRATHERDANCE",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/IDRATHERDANCE/angularjs_wp_rest_api/issues"
+    "url": "https://github.com/IDRATHERDANCE/angularjs-wp_rest_api/issues"
   },
-  "homepage": "https://github.com/IDRATHERDANCE/angularjs_wp_rest_api",
+  "homepage": "https://github.com/IDRATHERDANCE/angularjs-wp_rest_api",
   "devDependencies": {
     "angular": "^1.5.5",
     "browserify": "^13.0.0",

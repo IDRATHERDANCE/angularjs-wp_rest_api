@@ -592,23 +592,24 @@ var phone_menu_home=function(elem, num_index, height_p, proj_name){
                  });
 };
 
-////////////////////// remember the language on route change /////////////////////
+////////////////////// remember the language on route change ///////////////////// 
+
 var route_language_change=function(element){
          if($('.change_language').text()==='de'){
-              if(element.find('.english')[0].nextSibling!==null){
-                   element.find('.german').addClass('displaynone');
-                   element.find('.english').removeClass('displaynone');
+              if(element[0].childNodes[1].nextElementSibling!==null){
+                   $(element[0].childNodes[2]).addClass('displaynone');
+                    $(element[0].childNodes[1]).removeClass('displaynone');
                }
             }
              else{
-                   if(element.find('.english')[0].nextSibling!==null){
-                     element.find('.english').addClass('displaynone');
-                     element.find('.german').removeClass('displaynone'); 
+                   if(element[0].childNodes[1].nextSibling!==null){
+                      $(element[0].childNodes[1]).addClass('displaynone');
+                      $(element[0].childNodes[2]).removeClass('displaynone'); 
                    }
                }
 };
 ////////////////////// language strings /////////////////////
-var german_language_string=function(element){ 
+var german_language_string=function(element){  
     var html_string=element[0].innerHTML, 
     html_string_german=html_string.substring(html_string.indexOf('<br><span'));
     // if just headline with no body text  
@@ -620,17 +621,17 @@ var german_language_string=function(element){
           if(html_string_german.indexOf('<br><span')>-1){  
             var html_string_english=html_string.substring(html_string.indexOf('<p class="english" extra-margin="">')+35, html_string.indexOf('<br><span'));
             if(element.children().hasClass('main_head')===false){
-               var german='<p class="german">'+html_string_german.substr(4);    
+               var german='<p class="german">'+html_string_german.substr(4);  
              }
               else{
               var german='<p class="german">'+html_string_german;   
               }
-            element.find('.english').empty().append(html_string_english).after(german); 
+           $(element[0].childNodes[1]).empty().append(html_string_english).after(german); 
            }
         // if there is just english version of the text  
         else{
             var html_string_english=html_string.substring(html_string.indexOf('<p class="english" extra-margin="">')+35); 
-            element.find('.english').empty().append(html_string_english);
+             $(element[0].childNodes[1]).empty().append(html_string_english);
             }
         }                                         
  };

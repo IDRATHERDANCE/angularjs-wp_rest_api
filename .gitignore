@@ -29,6 +29,7 @@
 # OS generated files #
 ######################
 .DS_Store
+<<<<<<< HEAD
 .DS_Store?
 ._*
 .Spotlight-V100
@@ -64,5 +65,10 @@ Thumbs.db
 /node_modules
 /phantomas
 
+=======
+node_modules
+.tmp
+*/.sass-cache/
+
 wordpress
-/bower_components
+*/bower_components/

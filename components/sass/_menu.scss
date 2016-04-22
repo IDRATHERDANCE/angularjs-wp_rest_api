@@ -38,40 +38,40 @@
                 }   
 }
 
-.inmoov {@include vendor-prefix(transition, all 1s ease-in-out);top:0px;left:8px; &.inmoov_home {top:2px;left:0;}}
+.inmoov {@include vendor-prefix(transition, all 1s ease-in-out);top:0px;left:12px; &.inmoov_home {top:2px;left:0;}}
 .pro_p_inmoov {@include vendor-prefix(transition, all 1s ease-in-out);left:0;&.pro_p_inmoov_home {left:200px;}} 
 
 .invers{@include vendor-prefix(transition, all 1s ease-in-out);top:30px;left:0;&.invers_home{left:0px;}}
-.pro_p_invers {@include vendor-prefix(transition, all 1s ease-in-out);left:8px;&.pro_p_invers_home {left:105px;}} 
+.pro_p_invers {@include vendor-prefix(transition, all 1s ease-in-out);left:12px;&.pro_p_invers_home {left:105px;}} 
 
-.post_p_inmod{@include vendor-prefix(transition, all 1s ease-in-out);left:8px;&.post_p_inmod_home{left:80px;}}
-.post_p_inlum{@include vendor-prefix(transition, all 1s ease-in-out);left:8px;&.post_p_inlum_home{left:60px;}}
+.post_p_inmod{@include vendor-prefix(transition, all 1s ease-in-out);left:12px;&.post_p_inmod_home{left:80px;}}
+.post_p_inlum{@include vendor-prefix(transition, all 1s ease-in-out);left:12px;&.post_p_inlum_home{left:60px;}}
 
 
-.invisible-spring {@include vendor-prefix(transition, all 1s ease-in-out);top:102px;left:8px; &.invisible-spring_home {top:83px;left:8px; }}  
+.invisible-spring {@include vendor-prefix(transition, all 1s ease-in-out);top:102px;left:12px; &.invisible-spring_home {top:83px;left:12px; }}  
 .pro_p_invisible-spring {@include vendor-prefix(transition, all 1s ease-in-out);left:0;&.pro_p_invisible-spring_home {left:294px;}}  
 
 .post_p_surface-spring{@include vendor-prefix(transition, all 1s ease-in-out);left:0;&.post_p_surface-spring_home{left:310px;}}
 
-.cmyk {@include vendor-prefix(transition, all 1s ease-in-out);top:155px;left:0px; &.cmyk_home {top:143px;left:8px;}}
-.pro_p_cmyk {@include vendor-prefix(transition, all 1s ease-in-out);left:8px;&.pro_p_cmyk_home {left:5px;}} 
+.cmyk {@include vendor-prefix(transition, all 1s ease-in-out);top:155px;left:0px; &.cmyk_home {top:143px;left:12px;}}
+.pro_p_cmyk {@include vendor-prefix(transition, all 1s ease-in-out);left:12px;&.pro_p_cmyk_home {left:5px;}} 
         
-.neon {@include vendor-prefix(transition, all 1s ease-in-out);top:188px;left:8px; &.neon_home {top:175px;left:8px;}}
+.neon {@include vendor-prefix(transition, all 1s ease-in-out);top:188px;left:12px; &.neon_home {top:175px;left:12px;}}
 .pro_p_neon {@include vendor-prefix(transition, all 1s ease-in-out);left:0;&.pro_p_neon_home {left:403px;}}           
 
-.space-collection {@include vendor-prefix(transition, all 1s ease-in-out);top:225px;left:8px; &.space-collection_home {top:207px;left:0px;}}
+.space-collection {@include vendor-prefix(transition, all 1s ease-in-out);top:225px;left:12px; &.space-collection_home {top:207px;left:0px;}}
 .pro_p_space-collection {@include vendor-prefix(transition, all 1s ease-in-out);left:0;&.pro_p_space-collection_home {left:1px;}}   
 
-.leben {@include vendor-prefix(transition, all 1s ease-in-out);top:265px;left:8px; &.leben_home {top:239px;left:1px;}} 
+.leben {@include vendor-prefix(transition, all 1s ease-in-out);top:265px;left:12px; &.leben_home {top:239px;left:1px;}} 
 .pro_p_leben {@include vendor-prefix(transition, all 1s ease-in-out);left:0;&.pro_p_leben_home {left:1px;}}   
    
 
 
-.news {@include vendor-prefix(transition, all 1s ease-in-out);bottom: 110px;left:8px; &.news_home {bottom:85px;left:8px;}} 
+.news {@include vendor-prefix(transition, all 1s ease-in-out);bottom: 110px;left:12px; &.news_home {bottom:85px;left:12px;}} 
 .pro_p_news {@include vendor-prefix(transition, all 1s ease-in-out);left:0;&.pro_p_news_home {left:366px;}}   
 
 
-.about {@include vendor-prefix(transition, all 1s ease-in-out);bottom: 33px;left:8px; &.about_home {bottom:30px;left:8px;}} 
+.about {@include vendor-prefix(transition, all 1s ease-in-out);bottom: 33px;left:12px; &.about_home {bottom:30px;left:12px;}} 
 .pro_p_about {@include vendor-prefix(transition, all 1s ease-in-out);left:0;&.pro_p_about_home {left:334px;}}   
 
 .post_p_contact{@include vendor-prefix(transition, all 1s ease-in-out);left:0;&.post_p_contact_home{left:310px;}}

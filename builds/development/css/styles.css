@@ -102,7 +102,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   transform: rotate(-90deg);
   float: left;
   top: 1%;
-  margin-left: 35px;
+  margin-left: 40px;
   opacity: 0;
   z-index: 5;
   -webkit-transition: all 1s ease-in-out;
@@ -262,7 +262,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -o-transition: all 1s ease-in-out;
   transition: all 1s ease-in-out;
   top: 0px;
-  left: 8px;
+  left: 12px;
 }
 .inmoov.inmoov_home {
   top: 2px;
@@ -300,7 +300,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -moz-transition: all 1s ease-in-out;
   -o-transition: all 1s ease-in-out;
   transition: all 1s ease-in-out;
-  left: 8px;
+  left: 12px;
 }
 .pro_p_invers.pro_p_invers_home {
   left: 105px;
@@ -312,7 +312,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -moz-transition: all 1s ease-in-out;
   -o-transition: all 1s ease-in-out;
   transition: all 1s ease-in-out;
-  left: 8px;
+  left: 12px;
 }
 .post_p_inmod.post_p_inmod_home {
   left: 80px;
@@ -324,7 +324,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -moz-transition: all 1s ease-in-out;
   -o-transition: all 1s ease-in-out;
   transition: all 1s ease-in-out;
-  left: 8px;
+  left: 12px;
 }
 .post_p_inlum.post_p_inlum_home {
   left: 60px;
@@ -337,11 +337,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -o-transition: all 1s ease-in-out;
   transition: all 1s ease-in-out;
   top: 102px;
-  left: 8px;
+  left: 12px;
 }
 .invisible-spring.invisible-spring_home {
   top: 83px;
-  left: 8px;
+  left: 12px;
 }
 
 .pro_p_invisible-spring {
@@ -379,7 +379,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 }
 .cmyk.cmyk_home {
   top: 143px;
-  left: 8px;
+  left: 12px;
 }
 
 .pro_p_cmyk {
@@ -388,7 +388,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -moz-transition: all 1s ease-in-out;
   -o-transition: all 1s ease-in-out;
   transition: all 1s ease-in-out;
-  left: 8px;
+  left: 12px;
 }
 .pro_p_cmyk.pro_p_cmyk_home {
   left: 5px;
@@ -401,11 +401,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -o-transition: all 1s ease-in-out;
   transition: all 1s ease-in-out;
   top: 188px;
-  left: 8px;
+  left: 12px;
 }
 .neon.neon_home {
   top: 175px;
-  left: 8px;
+  left: 12px;
 }
 
 .pro_p_neon {
@@ -427,7 +427,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -o-transition: all 1s ease-in-out;
   transition: all 1s ease-in-out;
   top: 225px;
-  left: 8px;
+  left: 12px;
 }
 .space-collection.space-collection_home {
   top: 207px;
@@ -453,7 +453,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -o-transition: all 1s ease-in-out;
   transition: all 1s ease-in-out;
   top: 265px;
-  left: 8px;
+  left: 12px;
 }
 .leben.leben_home {
   top: 239px;
@@ -479,11 +479,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -o-transition: all 1s ease-in-out;
   transition: all 1s ease-in-out;
   bottom: 110px;
-  left: 8px;
+  left: 12px;
 }
 .news.news_home {
   bottom: 85px;
-  left: 8px;
+  left: 12px;
 }
 
 .pro_p_news {
@@ -505,11 +505,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -o-transition: all 1s ease-in-out;
   transition: all 1s ease-in-out;
   bottom: 33px;
-  left: 8px;
+  left: 12px;
 }
 .about.about_home {
   bottom: 30px;
-  left: 8px;
+  left: 12px;
 }
 
 .pro_p_about {

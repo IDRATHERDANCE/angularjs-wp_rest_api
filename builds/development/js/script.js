@@ -252,14 +252,25 @@ WpApp.directive("singleBlock", [function(){
          if(element.find('p').text()===''){
                 element.find('p').remove();
            } 
-           if((element.find('a').attr('href')!==undefined)&&(element.find('a').attr('href').substring(0, 32)==='http://ninalieven.net/wordpress/')){
-                element.find('a').contents().unwrap();
+        var aParent = element[0].childNodes[0],
+                aS = element[0].childNodes[0].childNodes[0];
+               
+                if ($(aS).hasClass('more')){ 
+                    var more = element[0].childNodes[0].childNodes[0].childNodes[0];
+                    aParent.removeChild(aS);
+                    $(aParent).append(more);
+                aParent = element[0].childNodes[0];
+                aS = element[0].childNodes[0].childNodes[0];
+              }
+        
+           if(($(aS).attr('href')!==undefined)&&($(aS).attr('href').substring(0, 32)==='http://ninalieven.net/wordpress/')){
+               aS = element[0].childNodes[0].childNodes[0];
+                var imgS = element[0].childNodes[0].childNodes[0].childNodes[0];
+                    aParent.removeChild(aS);
+                    $(aParent).append(imgS); 
            }
                 element.find('a').attr('target', '_blank');
-                    if(element.find('img').parent().hasClass('more')){
-                       element.find('img').unwrap();
-                    }
-           }
+          }
 }]);
 ////////////////////////// fix the width of the iframe ////////////////////////
 WpApp.directive('iframe', ['$window', function($window){
@@ -315,9 +326,9 @@ WpApp.directive('imgFix', ['$window', function($window){
     return function(scope, element){
         var w=angular.element($window),
             imgwi=element.find('img').attr('width'),
-            imghi=element.find('img').attr('height');
+            imghi=element.find('img').attr('height'); 
         scope.getWindowDimensions=function(){
-            return{'h':w.height()};
+            return{'h':w[0].innerHeight}; 
         };
         scope.$watch(scope.getWindowDimensions, function(newValue, oldValue){
             if((newValue.h<1500)&&(newValue.h>600)){
@@ -329,8 +340,8 @@ WpApp.directive('imgFix', ['$window', function($window){
             else if(newValue.h>1500){
                 var imgparwi=(((1500*0.7)*imgwi)/imghi)+22;    
             }
-                element.css('width', imgparwi);
-                element.find('.wp-caption').css('width', imgparwi-22)
+                $(element).css('width', imgparwi);
+                $(element.find('div')).css('width', imgparwi-22)
         }, true);
         w.bind('resize', function(){
             scope.$apply();
@@ -341,15 +352,14 @@ WpApp.directive('imgFix', ['$window', function($window){
 WpApp.directive('textBlock', ['$window', '$timeout', function($window, $timeout){
     return function(scope, element){
         var w=angular.element($window),
-            p_box=element.find('.english'),
-            read_more=element.find('.readmore'); 
+            p_box=element[0].childNodes[1]; 
             element.find('br').replaceWith('<p class="specialps"></p>'); 
                scope.trackHeightChanges=function(){
                     return{
-                         'text_height':p_box.height(),
-                         'box_height':element.height()
+                         'text_height':p_box.clientHeight, 
+                         'box_height':element[0].clientHeight
                       };
-                };
+                }; 
                 scope.$watch(scope.trackHeightChanges, function(newValue, oldValue){
                     var rows_exist=getRows(newValue.text_height, p_box),
                         rows_fit=getRows(newValue.box_height, element),
@@ -357,7 +367,7 @@ WpApp.directive('textBlock', ['$window', '$timeout', function($window, $timeout)
                         n_times=Math.ceil(divi);
                         if(n_times===0){n_times=1};
                         scope.n_times=n_times; 
-                        element.css({
+                        $(element).css({
                              'width':(n_times*400)+(n_times*40),
                              'max-width':(n_times*600)+(n_times*40),
                              'min-width':(n_times*400)+(n_times*40)
@@ -372,11 +382,11 @@ WpApp.directive('textBlock', ['$window', '$timeout', function($window, $timeout)
           count+=1;  
           count=count%2;
          if(count===1){
-            p_box=element.find('.german');  
+            p_box=element[0].childNodes[2];  
             scope.$apply();
          } 
             else{
-                p_box=element.find('.english');  
+                p_box=element[0].childNodes[1];  
                 scope.$apply();
             }
         });
@@ -385,21 +395,29 @@ WpApp.directive('textBlock', ['$window', '$timeout', function($window, $timeout)
 ////////////////////////// language change ////////////////////////
 WpApp.directive("textLanguage", [function(){
    return function(scope, element, attrs){
-       var spans=element.find('span'),
-           heads=element.find('.main_head'),
-           p_box=element.find('p');
+       var spans=element.find('span');
+           if ($(element[0].childNodes[0].childNodes[0]).hasClass('main_head')){
+               var heads=element[0].childNodes[0].childNodes[0],
+                    par=element[0].childNodes[0];
+                element[0].insertBefore(heads, par);  
+           }
            spans.css('text-decoration', 'none');
-           heads.insertBefore(heads.parent());
            german_language_string(element);
            route_language_change(element); 
-                var read_more=element.find('.readmore');
-                    read_more.bind('click', function(){
-                      $(this).next().slideDown(1200, function(){
-                      $(this).contents().unwrap();
+
+       var read_more = document.querySelectorAll('.readmore');
+                $(read_more).bind('click', function(){
+                    $(read_more).next().slideDown(1200, function(){
+                        var parContext = $(this)[0].parentNode,
+                            childNo = $(this)[0].childNodes;
+                                if($(this)[0].parentNode!==null){
+                                    $(this)[0].parentNode.removeChild($(this)[0]);
+                                    $(parContext).append(childNo);
+                                }
                             scope.$apply();
                       });
-                     read_more.slideUp(1200);
-                     read_more.prev().slideUp(1200);
+                     $(read_more).slideUp(1200);
+                     $(read_more).prev().slideUp(1200);
                    }); 
    }
 }]);
@@ -467,15 +485,16 @@ WpApp.directive("menuAnimation", ['$location', '$routeParams', '$timeout', funct
     }
 }]);
 ////////////////////////// adds margin on the last content box ////////////////////////////////////////////////
-WpApp.directive('lastMargin', ['$window', function($window){
+WpApp.directive('lastMargin', ['$window', '$location', function($window, $location){
     return function(scope, element, attr){
-        var w=angular.element($window);
+        var w=angular.element($window),
+            last=element[0].childNodes[element[0].childNodes.length-1];
         scope.getWindowDimensions=function(){
             return{'w':w[0].innerWidth};
         };
         scope.$watch(scope.getWindowDimensions, function(newValue, oldValue){ 
-            if(element.children().last().children().hasClass('main_head')){ // $(element[0].childNodes[element[0].childNodes.lenght-1].childNodes[0]).hassClass('main_head')
-              element.children().last().css('margin-right', newValue.w-660);  
+          if(($location.path()!=='/')&&($(last.childNodes[0]).hasClass('main_head'))){  
+                $(last).css('margin-right', newValue.w-660);  
             }
         }, true);
         w.bind('resize', function(){
@@ -637,23 +656,24 @@ var phone_menu_home=function(elem, num_index, height_p, proj_name){
                  });
 };
 
-////////////////////// remember the language on route change /////////////////////
+////////////////////// remember the language on route change ///////////////////// 
+
 var route_language_change=function(element){
          if($('.change_language').text()==='de'){
-              if(element.find('.english')[0].nextSibling!==null){
-                   element.find('.german').addClass('displaynone');
-                   element.find('.english').removeClass('displaynone');
+              if(element[0].childNodes[1].nextElementSibling!==null){
+                   $(element[0].childNodes[2]).addClass('displaynone');
+                    $(element[0].childNodes[1]).removeClass('displaynone');
                }
             }
              else{
-                   if(element.find('.english')[0].nextSibling!==null){
-                     element.find('.english').addClass('displaynone');
-                     element.find('.german').removeClass('displaynone'); 
+                   if(element[0].childNodes[1].nextSibling!==null){
+                      $(element[0].childNodes[1]).addClass('displaynone');
+                      $(element[0].childNodes[2]).removeClass('displaynone'); 
                    }
                }
 };
 ////////////////////// language strings /////////////////////
-var german_language_string=function(element){ 
+var german_language_string=function(element){  
     var html_string=element[0].innerHTML, 
     html_string_german=html_string.substring(html_string.indexOf('<br><span'));
     // if just headline with no body text  
@@ -665,17 +685,17 @@ var german_language_string=function(element){
           if(html_string_german.indexOf('<br><span')>-1){  
             var html_string_english=html_string.substring(html_string.indexOf('<p class="english" extra-margin="">')+35, html_string.indexOf('<br><span'));
             if(element.children().hasClass('main_head')===false){
-               var german='<p class="german">'+html_string_german.substr(4);    
+               var german='<p class="german">'+html_string_german.substr(4);  
              }
               else{
               var german='<p class="german">'+html_string_german;   
               }
-            element.find('.english').empty().append(html_string_english).after(german); 
+           $(element[0].childNodes[1]).empty().append(html_string_english).after(german); 
            }
         // if there is just english version of the text  
         else{
             var html_string_english=html_string.substring(html_string.indexOf('<p class="english" extra-margin="">')+35); 
-            element.find('.english').empty().append(html_string_english);
+             $(element[0].childNodes[1]).empty().append(html_string_english);
             }
         }                                         
  };
