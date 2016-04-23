@@ -38,7 +38,7 @@ jsSourcesRegular = ['components/angular/*.js', 'components/angular/regular/*.js'
 jsSourcesPhone = ['components/angular/*.js', 'components/angular/phone/*.js', 'components/scripts/*.js', 'components/scripts/phone/*.js'];
 jsSourcesIE10 = ['components/angular/*.js', 'components/angular/ie10/*.js', 'components/scripts/*.js', 'components/scripts/regular/*.js'];
 sassSources = ['components/sass/styles.scss', 'components/sass/styles_phone.scss'];
-
+var testFiles = ['tests/specs/specs.js', 'builds/js/*.js', 'builds/css/*.css']
     gulp.task('sass', function(){
         gulp.src(sassSources)
             .pipe(compass({
@@ -132,7 +132,7 @@ sassSources = ['components/sass/styles.scss', 'components/sass/styles_phone.scss
     });
 
     gulp.task('jasmineTest', function(){
-         gulp.src('tests/SpecRunner.html')
+         gulp.src(testFiles)
          .pipe(jasmine())
          .pipe(connect.reload())
          

@@ -1,3 +1,4 @@
+var jQuery = require('jquery');
 /*
  * jQuery Double Tap
  * Developer: Sergey Margaritov (sergey@margaritov.net)

@@ -72,6 +72,8 @@ node_modules
 
 wordpress
 */bower_components/
+bower_components/
+bower_components
 */css/
 css/
 css

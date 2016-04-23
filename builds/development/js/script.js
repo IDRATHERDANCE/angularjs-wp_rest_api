@@ -599,16 +599,16 @@ var phone_menu=function(eles, loc, index, proj_name, height_p, curr_index, dur){
         if(curr_index===num_index){
              eles.find('a').attr('href', '');
              eles.find('.arrow').addClass('arr_down');
-             eles.animate({top:0}, dur, function(){
+             $(eles).animate({top:0}, dur, function(){
              eles.find('a').attr('href', '/')     
              });
          }
          else{
               if(curr_index<num_index){
-                eles.animate({top:$(window).height()+(height_p*num_index)}, dur); 
+                $(eles).animate({top:$(window).height()+(height_p*num_index)}, dur); 
               }
               else{
-                eles.animate({top:-((curr_index-num_index)*height_p)}, dur);
+                $(eles).animate({top:-((curr_index-num_index)*height_p)}, dur);
               }
         }
 };
@@ -616,7 +616,7 @@ var phone_menu=function(eles, loc, index, proj_name, height_p, curr_index, dur){
 var phone_menu_home=function(elem, num_index, height_p, proj_name){
     $("section").css('margin-top', 0);
     elem.find('.arrow').removeClass('arr_down');
-    elem.animate({top:height_p*num_index}, 1000, function(){
+    $(elem).animate({top:height_p*num_index}, 1000, function(){
                  elem.find('a').attr('href', proj_name);
                  });
 };

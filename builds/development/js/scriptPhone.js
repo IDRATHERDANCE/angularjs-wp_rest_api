@@ -211,21 +211,20 @@ WpApp.directive('wholeContent', ['$compile', function($compile){
       });
    };
 }]);
-///////////// fix some worpress weirdness ///////////
+////////////////////////// single content block text fix some wordpress inserts ////////////////////////
 WpApp.directive("singleBlock", [function(){
    return function(scope, element, attrs){
          if(element.find('p').text()===''){
                 element.find('p').remove();
            } 
-           if((element.find('a').attr('href')!==undefined)&&(element.find('a').attr('href').substring(0, 32)==='http://ninalieven.net/wordpress/')){
-                element.find('a').contents().unwrap();
+           if((element.find('a').attr('href')!==undefined)&&(element.find('a').attr('href').substring(0, 32)==='http://ninalieven.net/wordpress/')){ 
+                $(element.find('a')[0]).contents().unwrap();
            }
                 element.find('a').attr('target', '_blank');
-         element.find('.wp-caption-text').insertAfter(element.find('.wp-caption-text').parent().parent())
-                       if(element.find('img').parent().hasClass('more')){
-                        element.find('img').unwrap();
+                    if(element.find('img').parent().hasClass('more')){
+                        $(element.find('img')[0]).unwrap();
                     }
-   }
+           }
 }]);
 ///////////// iframe height fix //////////////////////
 WpApp.directive('iframe', ['$window', function($window){
@@ -253,8 +252,8 @@ WpApp.directive('iframe', ['$window', function($window){
 }]);
 /////////// fix img /////////////////////////////////
 WpApp.directive("imgFix", ['$window', function($window){
-   return function(scope, element, attrs){
-        var w=angular.element($window).width(),
+   return function(scope, element, attrs){ 
+        var w=$(angular.element($window)).width(),
             wp_cap=element.find('.wp-caption'),
             image=element.find('img'),
             imgwi=image.attr('width'),
@@ -296,26 +295,50 @@ WpApp.directive('textBlock', ['$window', function($window){
             element.find('br').replaceWith('<p class="specialps"></p>'); 
     }
 }]);
+//////////////////////////// language change ////////////////////////
+//WpApp.directive("textLanguage", [function(){
+//   return function(scope, element, attrs){
+//       var spans=element.find('span'),
+//           heads=element.find('.main_head'),
+//           p_box=element.find('p');
+//           spans.css('text-decoration', 'none');
+//           heads.insertBefore(heads.parent());
+//           german_language_string(element);
+//           route_language_change(element);
+//                var read_more=element.find('.readmore');
+//                    read_more.bind('click', function(){
+//                      read_more.parent().find('.more').slideDown(1200, function(){
+//                         read_more.parent().find('.more').contents().unwrap();
+//                      });
+//                     read_more.slideUp(1200);
+//                     read_more.prev().slideUp(1200);
+//                   }); 
+//   }
+//}]);
+
+
 ////////////////////////// language change ////////////////////////
 WpApp.directive("textLanguage", [function(){
    return function(scope, element, attrs){
        var spans=element.find('span'),
-           heads=element.find('.main_head'),
+           heads=$(element[0].querySelector('.main_head')),
            p_box=element.find('p');
            spans.css('text-decoration', 'none');
            heads.insertBefore(heads.parent());
            german_language_string(element);
-           route_language_change(element);
-                var read_more=element.find('.readmore');
-                    read_more.bind('click', function(){
-                      read_more.parent().find('.more').slideDown(1200, function(){
-                         read_more.parent().find('.more').contents().unwrap();
+           route_language_change(element); 
+                var read_more=$(element[0].querySelectorAll('.readmore'));  
+                    $(read_more).bind('click', function(){ 
+                     $(read_more).next().slideDown(1200, function(){
+                      $(this).contents().unwrap();
+                         scope.$apply();
                       });
-                     read_more.slideUp(1200);
-                     read_more.prev().slideUp(1200);
+                     $(this).slideUp(1200);
+                     $(this).prev().slideUp(1200);
                    }); 
    }
 }]);
+
 ////////////////////////// language button ////////////////////////
 WpApp.directive("languageButton", [function(){
    return function(scope, element, attrs){
@@ -349,11 +372,11 @@ WpApp.directive('phoneMenuCss', ['$window', '$route', '$routeParams', '$location
     var location = $location.url().slice(1).replace(/\/[^\/]+$/, "");
     return function (scope, element, attr){
         var w=angular.element($window),
-            eles=element.parent().find('.projects'),
+            eles=$(element).parent().find('.projects'),
             nums=eles.size();
         scope.getWindowDimensions=function(){
             return {
-                'wh':w.height()
+                'wh':$(w).height()
             };
         };
          scope.$watch(scope.getWindowDimensions, function(newValue, oldValue){
@@ -368,7 +391,7 @@ WpApp.directive('phoneMenuCss', ['$window', '$route', '$routeParams', '$location
                     }); 
                           }
                           else if(($routeParams.page===undefined)&&(location==='')){
-                                element.css({'top':attr.phoneMenuCss*pro_h}); 
+                                $(element).css({'top':attr.phoneMenuCss*pro_h}); 
                           }
         }, true);
          w.bind('resize', function(){
@@ -380,23 +403,23 @@ WpApp.directive('phoneMenuCss', ['$window', '$route', '$routeParams', '$location
 WpApp.directive('phoneMenuAnimation', ['$window', '$route', '$routeParams', '$location', 'menuCurrentPhone', '$timeout', function ($window, $route, $routeParams, $location, menuCurrentPhone, $timeout) {
       var location = $location.url().slice(1).replace(/\/[^\/]+$/, "");
       return function (scope, element, attr) {
-           $timeout(function(){
+           $timeout(function(){ 
                 // on page refresh    
                if(($routeParams.page!==undefined)&&($routeParams.page===location)){
                 menuCurrentPhone.getCurrentMenuItemPhone().then(function(data){
-                   phone_menu(element, $routeParams.page, attr.phoneMenuCss, attr.menuItemName, element.context.clientHeight, data, 800);
+                   phone_menu(element, $routeParams.page, attr.phoneMenuCss, attr.menuItemName, element[0].clientHeight, data, 800);
                 }); 
                }
             // on route change         
                scope.$on('$routeChangeStart', function(next, current){
                    // if coming from a page to home
                     if((current.params.page===undefined)&&($routeParams.page!==undefined)){
-                        phone_menu_home(element, attr.phoneMenuCss, element.context.clientHeight, attr.menuItemName);
+                        phone_menu_home(element, attr.phoneMenuCss, element[0], attr.menuItemName);
                     }
                     // if coming from home to a page
                     else{
                         menuCurrentPhone.getCurrentMenuItemPhone().then(function(data){
-                        phone_menu(element, current.params.page, attr.phoneMenuCss, attr.menuItemName, element.context.clientHeight, data, 800);
+                        phone_menu(element, current.params.page, attr.phoneMenuCss, attr.menuItemName, element[0], data, 800);
                         }); 
                    }
               });  
@@ -535,16 +558,16 @@ var phone_menu=function(eles, loc, index, proj_name, height_p, curr_index, dur){
         if(curr_index===num_index){
              eles.find('a').attr('href', '');
              eles.find('.arrow').addClass('arr_down');
-             eles.animate({top:0}, dur, function(){
+             $(eles).animate({top:0}, dur, function(){
              eles.find('a').attr('href', '/')     
              });
          }
          else{
               if(curr_index<num_index){
-                eles.animate({top:$(window).height()+(height_p*num_index)}, dur); 
+                $(eles).animate({top:$(window).height()+(height_p*num_index)}, dur); 
               }
               else{
-                eles.animate({top:-((curr_index-num_index)*height_p)}, dur);
+                $(eles).animate({top:-((curr_index-num_index)*height_p)}, dur);
               }
         }
 };
@@ -552,7 +575,7 @@ var phone_menu=function(eles, loc, index, proj_name, height_p, curr_index, dur){
 var phone_menu_home=function(elem, num_index, height_p, proj_name){
     $("section").css('margin-top', 0);
     elem.find('.arrow').removeClass('arr_down');
-    elem.animate({top:height_p*num_index}, 1000, function(){
+    $(elem).animate({top:height_p*num_index}, 1000, function(){
                  elem.find('a').attr('href', proj_name);
                  });
 };
@@ -634,6 +657,9 @@ var german_language_stringIE=function(element){
             }
         }                                         
  };
+var jQuery = require('jquery');
+
+
 ;(function () {
 	'use strict';
 
@@ -1476,6 +1502,7 @@ var german_language_stringIE=function(element){
 	}
 }());
 
+var jQuery = require('jquery');
 /*
  * jQuery Double Tap
  * Developer: Sergey Margaritov (sergey@margaritov.net)

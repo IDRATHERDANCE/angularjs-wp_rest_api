@@ -128,27 +128,27 @@ var phone_menu=function(eles, loc, index, proj_name, height_p, curr_index, dur){
     $("section").css('margin-top', height_p+20);
     var num_index=parseInt(index); 
         if(curr_index===num_index){
-             eles.find('a').attr('href', '');
-             eles.find('.arrow').addClass('arr_down');
-             eles.animate({top:0}, dur, function(){
-             eles.find('a').attr('href', '/')     
+             $(eles).find('a').attr('href', '');
+             $(eles).find('.arrow').addClass('arr_down');
+             $(eles).animate({top:0}, dur, function(){
+             $(eles).find('a').attr('href', '/')     
              });
          }
          else{
               if(curr_index<num_index){
-                eles.animate({top:$(window).height()+(height_p*num_index)}, dur); 
+                $(eles).animate({top:$(window).height()+(height_p*num_index)}, dur); 
               }
               else{
-                eles.animate({top:-((curr_index-num_index)*height_p)}, dur);
+                $(eles).animate({top:-((curr_index-num_index)*height_p)}, dur);
               }
         }
 };
 ////////////////////// function for phone menu animation on coming to home page /////////////////////
 var phone_menu_home=function(elem, num_index, height_p, proj_name){
-    $("section").css('margin-top', 0);
-    elem.find('.arrow').removeClass('arr_down');
-    elem.animate({top:height_p*num_index}, 1000, function(){
-                 elem.find('a').attr('href', proj_name);
+   $("section").css('margin-top', 0);
+    $(elem).find('.arrow').removeClass('arr_down');
+    $(elem).animate({top:height_p*num_index}, 1000, function(){
+                 $(elem).find('a').attr('href', proj_name);
                  });
 };
 ////////////////////// remember the language on route change /////////////////////
