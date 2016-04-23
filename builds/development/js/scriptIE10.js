@@ -591,20 +591,22 @@ var phone_menu_home=function(elem, num_index, height_p, proj_name){
                  elem.find('a').attr('href', proj_name);
                  });
 };
-
-////////////////////// remember the language on route change ///////////////////// 
-
+////////////////////// remember the language on route change /////////////////////
 var route_language_change=function(element){
+        var engEl = $(element[0].querySelector('.english')),
+            gerEl = $(element[0].querySelector('.german'));    
          if($('.change_language').text()==='de'){
-              if(element[0].childNodes[1].nextElementSibling!==null){
-                   $(element[0].childNodes[2]).addClass('displaynone');
-                    $(element[0].childNodes[1]).removeClass('displaynone');
+             $('.readmore').text('read more');
+              if(engEl.nextSibling!==null){
+                   gerEl.addClass('displaynone');
+                   engEl.removeClass('displaynone');
                }
             }
              else{
-                   if(element[0].childNodes[1].nextSibling!==null){
-                      $(element[0].childNodes[1]).addClass('displaynone');
-                      $(element[0].childNodes[2]).removeClass('displaynone'); 
+                 $('.readmore').text('mehr lesen');
+                   if(engEl.nextSibling!==null){
+                     engEl.addClass('displaynone');
+                     gerEl.removeClass('displaynone'); 
                    }
                }
 };
@@ -625,8 +627,12 @@ var german_language_string=function(element){
              }
               else{
               var german='<p class="german">'+html_string_german;   
-              }
-           $(element[0].childNodes[1]).empty().append(html_string_english).after(german); 
+              } // check if there is a title
+                if (typeof element[0].childNodes[1]==='undefined'){  
+                    $(element[0].childNodes[0]).empty().append(html_string_english).after(german); 
+                } else{
+                    $(element[0].childNodes[1]).empty().append(html_string_english).after(german); 
+                }
            }
         // if there is just english version of the text  
         else{

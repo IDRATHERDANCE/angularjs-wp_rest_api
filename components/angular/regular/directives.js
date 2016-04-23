@@ -21,14 +21,16 @@ WpApp.directive("menuItemsHover", ['$location', function($location){
   return function(scope, element, attrs){
     if($location.url()=='/'){
         element.bind('mouseenter', function(event){
-            $(element.parent()[0].previousElementSibling.childNodes[0]).attr('src', attrs.menuItemsHover)
+            $(element).parent().prev().children().attr('src', attrs.menuItemsHover)
         });
         element.bind('mouseleave', function(event){
-            $(element.parent()[0].previousElementSibling.childNodes[0]).removeAttr('src')
+            $(element).parent().prev().children().removeAttr('src')
         });
     }
   }
 }]);
+
+
 ////////////////////////// adds class to first element in post or page that gives it extra left margin ////////////////////////
 WpApp.directive("extraMargin", [function(){
    return function(scope, element, attrs){
@@ -55,25 +57,14 @@ WpApp.directive("singleBlock", [function(){
          if(element.find('p').text()===''){
                 element.find('p').remove();
            } 
-        var aParent = element[0].childNodes[0],
-                aS = element[0].childNodes[0].childNodes[0];
-               
-                if ($(aS).hasClass('more')){ 
-                    var more = element[0].childNodes[0].childNodes[0].childNodes[0];
-                    aParent.removeChild(aS);
-                    $(aParent).append(more);
-                aParent = element[0].childNodes[0];
-                aS = element[0].childNodes[0].childNodes[0];
-              }
-        
-           if(($(aS).attr('href')!==undefined)&&($(aS).attr('href').substring(0, 32)==='http://ninalieven.net/wordpress/')){
-               aS = element[0].childNodes[0].childNodes[0];
-                var imgS = element[0].childNodes[0].childNodes[0].childNodes[0];
-                    aParent.removeChild(aS);
-                    $(aParent).append(imgS); 
+           if((element.find('a').attr('href')!==undefined)&&(element.find('a').attr('href').substring(0, 32)==='http://ninalieven.net/wordpress/')){ console.log( element.find('a'))
+                $(element.find('a')[0]).contents().unwrap();
            }
                 element.find('a').attr('target', '_blank');
-          }
+                    if(element.find('img').parent().hasClass('more')){
+                        $(element.find('img')[0]).unwrap();
+                    }
+           }
 }]);
 ////////////////////////// fix the width of the iframe ////////////////////////
 WpApp.directive('iframe', ['$window', function($window){
@@ -94,34 +85,11 @@ WpApp.directive('iframe', ['$window', function($window){
             else if(newValue.h>1500){
                 var imgparwi=((1500*0.7)*imgwi)/imghi;   
             }
-              element.css('width', imgparwi+3);
+              $(element).css('width', imgparwi+3);
         }, true);
         w.bind('resize', function(){
             scope.$apply();
         });
-    }
-}]);
-////////////////////////// fix the scrolling over the iframe ////////////////////////
-WpApp.directive('iframeScroll', ['$window', '$timeout', function($window, $timeout){
-    return function(scope, element){
-        var window=angular.element($window);
-        if(navigator.userAgent.toLowerCase().indexOf('firefox')>-1){
-            window.bind('scroll', function(){
-                $timeout.cancel($.data(this, 'scrollTimer'));
-                    $.data(this, 'scrollTimer', $timeout(function(){
-                        element.bind('mousemove', function(){
-                            element.find('iframe').css('z-index', 1);
-                        });
-                        var movementTimer=null;
-                        element.bind('mousemove', function(){
-                            $timeout.cancel(movementTimer);
-                                movementTimer=$timeout(function(){
-                                    element.find('iframe').css('z-index', -1);
-                                }, 1500);
-                        });
-                }, 250));
-            });
-       }
     }
 }]);
 ////////////////////////// fix the width of the image ////////////////////////////////////////////////
@@ -151,18 +119,19 @@ WpApp.directive('imgFix', ['$window', function($window){
         });
     }
 }]);
-////////////////////////// text box css, track height and number of lines and create more columns if necessary ////////////////////////
+///////////////////////// text box css, track height and number of lines and create more columns if necessary ////////////////////////
 WpApp.directive('textBlock', ['$window', '$timeout', function($window, $timeout){
     return function(scope, element){
         var w=angular.element($window),
-            p_box=element[0].childNodes[1]; 
+            p_box=$(element[0].querySelector('.english')),
+            p_box_ger = $(element[0].querySelector('.german'));
             element.find('br').replaceWith('<p class="specialps"></p>'); 
                scope.trackHeightChanges=function(){
                     return{
-                         'text_height':p_box.clientHeight, 
+                         'text_height':$(p_box)[0].clientHeight,
                          'box_height':element[0].clientHeight
                       };
-                }; 
+                };
                 scope.$watch(scope.trackHeightChanges, function(newValue, oldValue){
                     var rows_exist=getRows(newValue.text_height, p_box),
                         rows_fit=getRows(newValue.box_height, element),
@@ -185,12 +154,16 @@ WpApp.directive('textBlock', ['$window', '$timeout', function($window, $timeout)
           count+=1;  
           count=count%2;
          if(count===1){
-            p_box=element[0].childNodes[2];  
-            scope.$apply();
+            if(typeof p_box_ger[0]!=='undefined'){ 
+                p_box=$(element[0].querySelector('.german'));  
+                scope.$apply();
+            }
          } 
             else{
-                p_box=element[0].childNodes[1];  
-                scope.$apply();
+                if(typeof p_box[0]!=='undefined'){ 
+                    p_box=$(element[0].querySelector('.english'));  
+                    scope.$apply();
+                }
             }
         });
     }
@@ -198,29 +171,21 @@ WpApp.directive('textBlock', ['$window', '$timeout', function($window, $timeout)
 ////////////////////////// language change ////////////////////////
 WpApp.directive("textLanguage", [function(){
    return function(scope, element, attrs){
-       var spans=element.find('span');
-           if ($(element[0].childNodes[0].childNodes[0]).hasClass('main_head')){
-               var heads=element[0].childNodes[0].childNodes[0],
-                    par=element[0].childNodes[0];
-                element[0].insertBefore(heads, par);  
-           }
+       var spans=element.find('span'),
+           heads=$(element[0].querySelector('.main_head')),
+           p_box=element.find('p');
            spans.css('text-decoration', 'none');
+           heads.insertBefore(heads.parent());
            german_language_string(element);
            route_language_change(element); 
-
-       var read_more = document.querySelectorAll('.readmore');
-                $(read_more).bind('click', function(){
-                    $(read_more).next().slideDown(1200, function(){
-                        var parContext = $(this)[0].parentNode,
-                            childNo = $(this)[0].childNodes;
-                                if($(this)[0].parentNode!==null){
-                                    $(this)[0].parentNode.removeChild($(this)[0]);
-                                    $(parContext).append(childNo);
-                                }
-                            scope.$apply();
+                var read_more=$(element[0].querySelectorAll('.readmore'));  
+                    $(read_more).bind('click', function(){ 
+                     $(read_more).next().slideDown(1200, function(){
+                      $(this).contents().unwrap();
+                         scope.$apply();
                       });
-                     $(read_more).slideUp(1200);
-                     $(read_more).prev().slideUp(1200);
+                     $(this).slideUp(1200);
+                     $(this).prev().slideUp(1200);
                    }); 
    }
 }]);
@@ -236,7 +201,7 @@ WpApp.directive("languageButton", [function(){
                  if(count===1){
                     element.text('en');
                     $('.readmore').text('mehr lesen');
-                    if($(this).next().hasClass('german')){
+                    if($(this).next().hasClass('german')){ 
                         $(this).addClass('displaynone');
                         $(this).next().removeClass('displaynone');
                         }

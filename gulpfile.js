@@ -7,7 +7,8 @@ var gulp = require('gulp'),
     guplif = require('gulp-if'),
     uglify = require('gulp-uglify'),
     uglifycss = require('gulp-uglifycss');
-    minifyHTML = require('gulp-minify-html');
+    minifyHTML = require('gulp-minify-html'),
+    jasmine = require('gulp-jasmine'),
     cors = function (req, res, next) {
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Access-Control-Allow-Headers', '*');
@@ -102,6 +103,7 @@ sassSources = ['components/sass/styles.scss', 'components/sass/styles_phone.scss
         gulp.watch(jsSourcesIE10, ['jsIE10']);
         gulp.watch('builds/development/*.html', ['html']);
         gulp.watch('builds/development/part/*.html', ['htmlPage']);
+        gulp.watch('tests/spec/specs.js', ['jasmineTest']);
         
     });
 
@@ -116,6 +118,27 @@ sassSources = ['components/sass/styles.scss', 'components/sass/styles_phone.scss
     });
 
     gulp.task('default', ['html', 'htmlPage', 'sass', 'js', 'jsPhone', 'jsIE10', 'connect', 'watch']);
+
+// run Jasmine tests
+
+     gulp.task('connectTest', function(){
+        connect.server({
+            root: 'tests',
+            livereload: true,
+            middleware: function () {
+              return [cors];
+            }
+        })
+    });
+
+//    gulp.task('jasmineTest', function(){
+//         gulp.src('tests/SpecRunner.html')
+//         .pipe(jasmine())
+//         .pipe(connect.reload())
+//         
+//    });
+//
+//gulp.task('test', ['jasmineTest', 'connectTest', 'watch']);
 
 
 

@@ -860,10 +860,6 @@ body {
   body {
     overflow-x: scroll;
   }
-
-  iframe {
-    z-index: -1;
-  }
 }
 ::-webkit-scrollbar {
   height: 0px;
