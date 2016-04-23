@@ -131,14 +131,14 @@ sassSources = ['components/sass/styles.scss', 'components/sass/styles_phone.scss
         })
     });
 
-//    gulp.task('jasmineTest', function(){
-//         gulp.src('tests/SpecRunner.html')
-//         .pipe(jasmine())
-//         .pipe(connect.reload())
-//         
-//    });
-//
-//gulp.task('test', ['jasmineTest', 'connectTest', 'watch']);
+    gulp.task('jasmineTest', function(){
+         gulp.src('tests/SpecRunner.html')
+         .pipe(jasmine())
+         .pipe(connect.reload())
+         
+    });
+
+gulp.task('test', ['jasmineTest', 'connectTest', 'watch']);
 
 
 
