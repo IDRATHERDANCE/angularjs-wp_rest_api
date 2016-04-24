@@ -157,16 +157,18 @@ var route_language_change=function(element){
             gerEl = $(element[0].querySelector('.german'));    
          if($('.change_language').text()==='de'){
              $('.readmore').text('read more');
-              if(engEl.nextSibling!==null){
+              if(engEl[0].nextSibling!==null){
                    gerEl.addClass('displaynone');
                    engEl.removeClass('displaynone');
                }
             }
              else{
                  $('.readmore').text('mehr lesen');
-                   if(engEl.nextSibling!==null){
+                   if(engEl[0].nextSibling!==null){ 
                      engEl.addClass('displaynone');
                      gerEl.removeClass('displaynone'); 
+                   } else {
+                     engEl.removeClass('displaynone');
                    }
                }
 };

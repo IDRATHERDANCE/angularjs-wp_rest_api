@@ -41,13 +41,15 @@ body {
     background:#ffffff;
 }
 
-section {width:100%;overflow-x:hidden;@include vendor-prefix(transition, all 0.8s ease-in-out);}
+section {width:100%;overflow-x:hidden;     padding-bottom:70px;
+    @include vendor-prefix(transition, all 0.8s ease-in-out);
+}
 
 .view-animate {
     position:relative;
     height:100%;
     opacity:1;   
-        @include vendor-prefix(transition, all 1s ease-in-out);   
+        @include vendor-prefix(transition, all 1s ease-in-out); 
 }
 
 .view-animate.ng-enter{opacity:0;}
@@ -63,7 +65,7 @@ section {width:100%;overflow-x:hidden;@include vendor-prefix(transition, all 0.8
     top:0;
     background-color:rgba(255,255,255, 0);
     width:100%;
-    
+  
         p {font-family:$nu; font-size:12px; position:relative; width:50%; float:left; margin-left:3%;}
 }
 
@@ -154,7 +156,6 @@ section {width:100%;overflow-x:hidden;@include vendor-prefix(transition, all 0.8
 
 .page {
     width:100%;
-    padding-bottom:70px;
     position:relative;
     z-index:1;
 }

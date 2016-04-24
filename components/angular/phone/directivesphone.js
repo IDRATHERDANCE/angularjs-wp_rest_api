@@ -59,24 +59,24 @@ WpApp.directive('iframe', ['$window', function($window){
 WpApp.directive("imgFix", ['$window', function($window){
    return function(scope, element, attrs){ 
         var w=$(angular.element($window)).width(),
-            wp_cap=element.find('.wp-caption'),
+            wp_cap=$(element).find('.wp-caption'),
             image=element.find('img'),
             imgwi=image.attr('width'),
             imghi=image.attr('height'),
             windowhi=(w*imghi)/imgwi,
             count=0;
-            wp_cap.css('width', '100%');
-            element.css('height', windowhi);
+            $(wp_cap).css('width', '100%');
+            $(element).css('height', windowhi);
        var zoomIn=function(){
-                  image.css({position:'relative', width:'250%', 'max-width':'250%', 'min-width':'250%'});
-                  wp_cap.css({'overflow':'auto'});
-                  wp_cap.scrollTop(wp_cap.height()/2).scrollLeft(wp_cap.width()/2);
+                  $(image).css({position:'relative', width:'250%', 'max-width':'250%', 'min-width':'250%'});
+                  $(wp_cap).css({'overflow':'auto'});
+                  $(wp_cap).scrollTop(wp_cap.height()/2).scrollLeft(wp_cap.width()/2);
             },
            zoomOut=function(){
-                   image.css({position:'static', width:'100%', 'max-width':'100%', 'min-width':'100%'});
-                   wp_cap.css({overflow:'hidden'});
+                   $(image).css({position:'static', width:'100%', 'max-width':'100%', 'min-width':'100%'});
+                   $(wp_cap).css({overflow:'hidden'});
            };
-        element.bind('doubletap', function(){
+        $(element).bind('doubletap, pinch', function(){ 
             count+=1;
             count=count%2;
                 if (count==1){
@@ -86,12 +86,6 @@ WpApp.directive("imgFix", ['$window', function($window){
                     zoomOut();
                 }
         });
-           element.bind('pinchopen', function(){alert('open');
-                zoomIn();
-           });
-           element.bind('pinchclose', function(){
-                zoomOut();
-           });
     }
 }]);
 ////////////////////////// text box css, track height and number of lines and create more columns if necessary ////////////////////////
@@ -100,28 +94,6 @@ WpApp.directive('textBlock', ['$window', function($window){
             element.find('br').replaceWith('<p class="specialps"></p>'); 
     }
 }]);
-//////////////////////////// language change ////////////////////////
-//WpApp.directive("textLanguage", [function(){
-//   return function(scope, element, attrs){
-//       var spans=element.find('span'),
-//           heads=element.find('.main_head'),
-//           p_box=element.find('p');
-//           spans.css('text-decoration', 'none');
-//           heads.insertBefore(heads.parent());
-//           german_language_string(element);
-//           route_language_change(element);
-//                var read_more=element.find('.readmore');
-//                    read_more.bind('click', function(){
-//                      read_more.parent().find('.more').slideDown(1200, function(){
-//                         read_more.parent().find('.more').contents().unwrap();
-//                      });
-//                     read_more.slideUp(1200);
-//                     read_more.prev().slideUp(1200);
-//                   }); 
-//   }
-//}]);
-
-
 ////////////////////////// language change ////////////////////////
 WpApp.directive("textLanguage", [function(){
    return function(scope, element, attrs){
@@ -138,8 +110,8 @@ WpApp.directive("textLanguage", [function(){
                       $(this).contents().unwrap();
                          scope.$apply();
                       });
-                     $(this).slideUp(1200);
-                     $(this).prev().slideUp(1200);
+                     $(read_more).slideUp(1200);
+                     $(read_more).prev().slideUp(1200);
                    }); 
    }
 }]);

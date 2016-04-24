@@ -57,7 +57,7 @@ WpApp.directive("singleBlock", [function(){
          if(element.find('p').text()===''){
                 element.find('p').remove();
            } 
-           if((element.find('a').attr('href')!==undefined)&&(element.find('a').attr('href').substring(0, 32)==='http://ninalieven.net/wordpress/')){ console.log( element.find('a'))
+           if((element.find('a').attr('href')!==undefined)&&(element.find('a').attr('href').substring(0, 32)==='http://ninalieven.net/wordpress/')){
                 $(element.find('a')[0]).contents().unwrap();
            }
                 element.find('a').attr('target', '_blank');
@@ -184,8 +184,8 @@ WpApp.directive("textLanguage", [function(){
                       $(this).contents().unwrap();
                          scope.$apply();
                       });
-                     $(this).slideUp(1200);
-                     $(this).prev().slideUp(1200);
+                     $(read_more).slideUp(1200);
+                     $(read_more).prev().slideUp(1200);
                    }); 
    }
 }]);

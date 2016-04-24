@@ -568,10 +568,10 @@ var phone_menu=function(eles, loc, index, proj_name, height_p, curr_index, dur){
     $("section").css('margin-top', height_p+20);
     var num_index=parseInt(index); 
         if(curr_index===num_index){
-             eles.find('a').attr('href', '');
-             eles.find('.arrow').addClass('arr_down');
+             $(eles).find('a').attr('href', '');
+             $(eles).find('.arrow').addClass('arr_down');
              $(eles).animate({top:0}, dur, function(){
-             eles.find('a').attr('href', '/')     
+             $(eles).find('a').attr('href', '/')     
              });
          }
          else{
@@ -585,10 +585,10 @@ var phone_menu=function(eles, loc, index, proj_name, height_p, curr_index, dur){
 };
 ////////////////////// function for phone menu animation on coming to home page /////////////////////
 var phone_menu_home=function(elem, num_index, height_p, proj_name){
-    $("section").css('margin-top', 0);
-    elem.find('.arrow').removeClass('arr_down');
+   $("section").css('margin-top', 0);
+    $(elem).find('.arrow').removeClass('arr_down');
     $(elem).animate({top:height_p*num_index}, 1000, function(){
-                 elem.find('a').attr('href', proj_name);
+                 $(elem).find('a').attr('href', proj_name);
                  });
 };
 ////////////////////// remember the language on route change /////////////////////
@@ -597,16 +597,18 @@ var route_language_change=function(element){
             gerEl = $(element[0].querySelector('.german'));    
          if($('.change_language').text()==='de'){
              $('.readmore').text('read more');
-              if(engEl.nextSibling!==null){
+              if(engEl[0].nextSibling!==null){
                    gerEl.addClass('displaynone');
                    engEl.removeClass('displaynone');
                }
             }
              else{
                  $('.readmore').text('mehr lesen');
-                   if(engEl.nextSibling!==null){
+                   if(engEl[0].nextSibling!==null){ 
                      engEl.addClass('displaynone');
                      gerEl.removeClass('displaynone'); 
+                   } else {
+                     engEl.removeClass('displaynone');
                    }
                }
 };

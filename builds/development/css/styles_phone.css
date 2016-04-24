@@ -158,6 +158,7 @@ body {
 section {
   width: 100%;
   overflow-x: hidden;
+  padding-bottom: 70px;
   -webkit-transition: all 0.8s ease-in-out;
   -ms-transition: all 0.8s ease-in-out;
   -moz-transition: all 0.8s ease-in-out;
@@ -317,7 +318,6 @@ section {
 
 .page {
   width: 100%;
-  padding-bottom: 70px;
   position: relative;
   z-index: 1;
 }
