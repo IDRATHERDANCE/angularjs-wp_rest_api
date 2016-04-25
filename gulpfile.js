@@ -8,7 +8,6 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     uglifycss = require('gulp-uglifycss');
     minifyHTML = require('gulp-minify-html'),
-    jasmine = require('gulp-jasmine'),
     cors = function (req, res, next) {
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Access-Control-Allow-Headers', '*');
@@ -38,7 +37,7 @@ jsSourcesRegular = ['components/angular/*.js', 'components/angular/regular/*.js'
 jsSourcesPhone = ['components/angular/*.js', 'components/angular/phone/*.js', 'components/scripts/*.js', 'components/scripts/phone/*.js'];
 jsSourcesIE10 = ['components/angular/*.js', 'components/angular/ie10/*.js', 'components/scripts/*.js', 'components/scripts/regular/*.js'];
 sassSources = ['components/sass/styles.scss', 'components/sass/styles_phone.scss'];
-var testFiles = ['tests/specs/specs.js', 'builds/js/*.js', 'builds/css/*.css']
+
     gulp.task('sass', function(){
         gulp.src(sassSources)
             .pipe(compass({
@@ -103,9 +102,7 @@ var testFiles = ['tests/specs/specs.js', 'builds/js/*.js', 'builds/css/*.css']
         gulp.watch(jsSourcesIE10, ['jsIE10']);
         gulp.watch('builds/development/*.html', ['html']);
         gulp.watch('builds/development/part/*.html', ['htmlPage']);
-        gulp.watch('tests/spec/specs.js', ['jasmineTest']);
-        
-    });
+     });
 
     gulp.task('connect', function(){
         connect.server({
@@ -118,27 +115,5 @@ var testFiles = ['tests/specs/specs.js', 'builds/js/*.js', 'builds/css/*.css']
     });
 
     gulp.task('default', ['html', 'htmlPage', 'sass', 'js', 'jsPhone', 'jsIE10', 'connect', 'watch']);
-
-// run Jasmine tests
-
-     gulp.task('connectTest', function(){
-        connect.server({
-            root: 'tests',
-            livereload: true,
-            middleware: function () {
-              return [cors];
-            }
-        })
-    });
-
-    gulp.task('jasmineTest', function(){
-         gulp.src(testFiles)
-         .pipe(jasmine())
-         .pipe(connect.reload())
-         
-    });
-
-gulp.task('test', ['jasmineTest', 'connectTest', 'watch']);
-
 
 

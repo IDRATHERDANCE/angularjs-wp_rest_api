@@ -1,3 +1,9 @@
+//var $ = require('jquery');
+//var angular = require('angular');
+//var ngRoute = require('angular-route');
+//var ngAnimate = require('angular-animate');
+//var ngResource = require('angular-resource');
+//var ngSanitize = require('angular-sanitize');
 describe('ninalieven.net unit tests', function(){
         var expectedUrl='http://ninalieven.net/wordpress/wp-json/posts?type[]=page&type[]=post',
             expectRoute='/part/page.html';
@@ -253,7 +259,7 @@ beforeEach(module('WpApp'));
                               appendSetFixtures(element);
                           $scope.$digest();
                       expect(element.css('width')).toBeDefined();
-                  expect(element.width()).toBeCloseTo(((win_height*0.7)*imgwi)/imghi+3, 0);
+                  expect($scope.imgparwi+3).toBeCloseTo(((win_height*0.7)*imgwi)/imghi+3, 0);
            });
          
      });  
@@ -291,25 +297,26 @@ beforeEach(module('WpApp'));
      
      describe('textLanguage directive tests', function(){ 
             
-          it('should reassamble the test and show more text on read more clicked', function(){
+          it('should reassamble the text and show more text on read more clicked', function(){
           var wrapper=$compile(cmyk)($scope),
               element=wrapper.find('.text_box'),
-              read_more=element.find('.german .readmore');
-              appendSetFixtures(wrapper);
+              read_more=element.find('.english .readmore');
+                appendSetFixtures(wrapper);
+
+
               expect(element.find('span').css('text-decoration')).toBe('none');
               expect(element.find('.main_head').next().hasClass('english')).toBe(true);
               expect(element.find('.main_head').next().next().hasClass('german')).toBe(true);
               
                   expect(read_more.next()).toBeHidden();
-                  expect(read_more).not.toBeHidden();
-                  expect(read_more.prev()).not.toBeHidden();
+                  expect(read_more.css('display')).toBe('block');
 
-                        read_more.triggerHandler('click');
+                       read_more.trigger('click');
               
               expect(read_more).toBeHidden();
-              expect(read_more.next()).not.toBeHidden();
+              expect(read_more.next().css('display')).toBe('block');
               expect(read_more.prev()).toBeHidden();
-              expect(wrapper.find('.german .more').length).toBe(0)
+              expect(wrapper.find('.english .more')).toBeHidden();
            });
          
      });       
@@ -349,11 +356,12 @@ beforeEach(module('WpApp'));
             
           it('should give bigger margine to the last headline', function(){
           var element=$compile(lastMarg)($scope),
-                  windowWidth=$scope.getWindowDimensions().w;
+                  windowWidth=$scope.getWindowDimensions().w,
+                    last=element[0].childNodes[element[0].childNodes.length-1];
                       appendSetFixtures(element);
                       $scope.$apply();
-                  expect(element.children().last().children().hasClass('main_head')).toBe(true);
-              expect(element.children().last().css('margin-right')).toEqual(windowWidth-660+'px');
+                  expect($(last.childNodes[0]).hasClass('main_head')).toBe(true);
+              expect($(last).css('margin-right')).toEqual(windowWidth-660+'px');
            });
          
      }); 

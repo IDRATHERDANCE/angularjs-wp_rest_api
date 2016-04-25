@@ -84,7 +84,8 @@ WpApp.directive('iframe', ['$window', function($window){
                 }
             else if(newValue.h>1500){
                 var imgparwi=((1500*0.7)*imgwi)/imghi;   
-            }
+                }
+                scope.imgparwi = imgparwi;
               $(element).css('width', imgparwi+3);
         }, true);
         w.bind('resize', function(){
@@ -261,8 +262,10 @@ WpApp.directive('lastMargin', ['$window', '$location', function($window, $locati
             return{'w':w[0].innerWidth};
         };
         scope.$watch(scope.getWindowDimensions, function(newValue, oldValue){ 
-          if(($location.path()!=='/')&&($(last.childNodes[0]).hasClass('main_head'))){  
-                $(last).css('margin-right', newValue.w-660);  
+            if (typeof last!=='undefined'){
+              if($(last.childNodes[0]).hasClass('main_head')){  
+                    $(last).css('margin-right', newValue.w-660);  
+                }
             }
         }, true);
         w.bind('resize', function(){
@@ -270,3 +273,5 @@ WpApp.directive('lastMargin', ['$window', '$location', function($window, $locati
         });
     }
 }]);
+
+

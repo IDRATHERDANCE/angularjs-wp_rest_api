@@ -1,6 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-
-
 var angular = require('angular');
 var ngRoute = require('angular-route');
 var ngAnimate = require('angular-animate');
@@ -281,7 +279,8 @@ WpApp.directive('iframe', ['$window', function($window){
                 }
             else if(newValue.h>1500){
                 var imgparwi=((1500*0.7)*imgwi)/imghi;   
-            }
+                }
+                scope.imgparwi = imgparwi;
               $(element).css('width', imgparwi+3);
         }, true);
         w.bind('resize', function(){
