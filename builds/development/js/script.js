@@ -229,7 +229,7 @@ WpApp.directive("menuItemsHover", ['$location', function($location){
 ////////////////////////// adds class to first element in post or page that gives it extra left margin ////////////////////////
 WpApp.directive("extraMargin", [function(){
    return function(scope, element, attrs){
-                if(element.find('.main_head')){
+                if(element.find('b').length===1){ 
                     element.parent().addClass('mar_head');
                 }
                 else{
@@ -457,8 +457,10 @@ WpApp.directive('lastMargin', ['$window', '$location', function($window, $locati
             return{'w':w[0].innerWidth};
         };
         scope.$watch(scope.getWindowDimensions, function(newValue, oldValue){ 
-          if(($location.path()!=='/')&&($(last.childNodes[0]).hasClass('main_head'))){  
-                $(last).css('margin-right', newValue.w-660);  
+            if (typeof last!=='undefined'){
+              if($(last.childNodes[0]).hasClass('main_head')){  
+                    $(last).css('margin-right', newValue.w-660);  
+                }
             }
         }, true);
         w.bind('resize', function(){
@@ -466,6 +468,9 @@ WpApp.directive('lastMargin', ['$window', '$location', function($window, $locati
         });
     }
 }]);
+
+
+
 var $ = require('jquery');
 ////// function that goes through big data object from a service and depending on type and location and assamles it as a string /////
 var content_string_assemble=function(pagectt, loc){

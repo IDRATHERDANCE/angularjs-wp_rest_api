@@ -34,7 +34,7 @@ WpApp.directive("menuItemsHover", ['$location', function($location){
 ////////////////////////// adds class to first element in post or page that gives it extra left margin ////////////////////////
 WpApp.directive("extraMargin", [function(){
    return function(scope, element, attrs){
-                if(element.find('.main_head')){
+                if(element.find('b').length===1){ 
                     element.parent().addClass('mar_head');
                 }
                 else{
