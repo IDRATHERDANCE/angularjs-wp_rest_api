@@ -229,7 +229,7 @@ WpApp.directive("menuItemsHover", ['$location', function($location){
 ////////////////////////// adds class to first element in post or page that gives it extra left margin ////////////////////////
 WpApp.directive("extraMargin", [function(){
    return function(scope, element, attrs){
-                if(element.find('b').length===1){ 
+                if(element.find('b').length!==0){ 
                     element.parent().addClass('mar_head');
                 }
                 else{
@@ -324,15 +324,17 @@ WpApp.directive('textBlock', ['$window', '$timeout', function($window, $timeout)
             element.find('br').replaceWith('<p class="specialps"></p>'); 
                scope.trackHeightChanges=function(){
                     return{
-                         'text_height':$(p_box)[0].clientHeight,
-                         'box_height':element[0].clientHeight
+                         
+                         'text_height':$(p_box)[0].offsetHeight,
+                         'box_height':$(element)[0].offsetHeight
+
                       };
                 };
-                scope.$watch(scope.trackHeightChanges, function(newValue, oldValue){
+                scope.$watch(scope.trackHeightChanges, function(newValue, oldValue){ 
                     var rows_exist=getRows(newValue.text_height, p_box),
                         rows_fit=getRows(newValue.box_height, element),
                         divi=rows_exist/rows_fit,
-                        n_times=Math.ceil(divi);
+                        n_times=Math.ceil(divi); 
                         if(n_times===0){n_times=1};
                         scope.n_times=n_times; 
                         $(element).css({
@@ -577,7 +579,7 @@ var head_index=[];
     return g_h;
 };
 ////////////////////// function that slides view to posts within one page ///////////////////////////
-var move_left=function(where, text, left, delay){
+var move_left=function(where, text, left, delay){ 
      if(text===where){
           if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
               $('body').delay(delay).animate({scrollLeft:left-200}, 1000);
@@ -593,8 +595,8 @@ var getRows=function(el_h, ele){
         font_size=$(ele).css('font-size'),
         scale=1.15,
         line_height=Math.floor(parseInt(font_size)*scale),
-        rows=height/line_height;
-    return num_rows=Math.round(rows);
+        rows=height/line_height; 
+    return num_rows=Math.ceil(rows);
 };
 ////////// function for phone menu animation /////////////////////////////////////////////////////////
 var phone_menu=function(eles, loc, index, proj_name, height_p, curr_index, dur){

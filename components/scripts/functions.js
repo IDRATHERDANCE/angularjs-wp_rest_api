@@ -104,7 +104,7 @@ var head_index=[];
     return g_h;
 };
 ////////////////////// function that slides view to posts within one page ///////////////////////////
-var move_left=function(where, text, left, delay){
+var move_left=function(where, text, left, delay){ 
      if(text===where){
           if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
               $('body').delay(delay).animate({scrollLeft:left-200}, 1000);
@@ -120,8 +120,8 @@ var getRows=function(el_h, ele){
         font_size=$(ele).css('font-size'),
         scale=1.15,
         line_height=Math.floor(parseInt(font_size)*scale),
-        rows=height/line_height;
-    return num_rows=Math.round(rows);
+        rows=height/line_height; 
+    return num_rows=Math.ceil(rows);
 };
 ////////// function for phone menu animation /////////////////////////////////////////////////////////
 var phone_menu=function(eles, loc, index, proj_name, height_p, curr_index, dur){
@@ -174,30 +174,42 @@ var route_language_change=function(element){
 };
 ////////////////////// language strings /////////////////////
 var german_language_string=function(element){  
-    var html_string=element[0].innerHTML, 
-    html_string_german=html_string.substring(html_string.indexOf('<br><span'));
+    var html_string=element[0].innerHTML,
+        html_string_german; 
+    if (html_string.indexOf('<br><strong><span style="text-decoration: none;">')>-1){ 
+              html_string_german=html_string.substring(html_string.indexOf('<br><strong><span'));
+      } else { 
+          html_string_german=html_string.substring(html_string.indexOf('<br><span'));    
+      };
     // if just headline with no body text  
     if (html_string.slice(-39)==='<p class="english" extra-margin=""></p>'){ 
         var html_string_english='';
       }                                         
       else{
           // if there is a german version of the text  
-          if(html_string_german.indexOf('<br><span')>-1){  
-            var html_string_english=html_string.substring(html_string.indexOf('<p class="english" extra-margin="">')+35, html_string.indexOf('<br><span'));
-            if(element.children().hasClass('main_head')===false){
+          if((html_string_german.indexOf('<br><span')>-1)||(html_string_german.indexOf('<br><strong><span')>-1)){
+
+            var html_string_english; 
+            if (html_string.indexOf('<br><strong><span')>-1){ 
+                html_string_english=html_string.substring(html_string.indexOf('<p class="english" extra-margin="">')+35, html_string.indexOf('<br><strong><span')); 
+            } else { 
+              html_string_english=html_string.substring(html_string.indexOf('<p class="english" extra-margin="">')+35, html_string.indexOf('<br><span'));  
+            }
+
+            if(element.children().hasClass('main_head')===false){          
                var german='<p class="german">'+html_string_german.substr(4);  
              }
-              else{
+              else{ 
               var german='<p class="german">'+html_string_german;   
               } // check if there is a title
                 if (typeof element[0].childNodes[1]==='undefined'){  
                     $(element[0].childNodes[0]).empty().append(html_string_english).after(german); 
                 } else{
-                    $(element[0].childNodes[1]).empty().append(html_string_english).after(german); 
+                    $(element[0].childNodes[1]).empty().append(html_string_english).after(german)
                 }
            }
         // if there is just english version of the text  
-        else{
+        else{ 
             var html_string_english=html_string.substring(html_string.indexOf('<p class="english" extra-margin="">')+35); 
              $(element[0].childNodes[1]).empty().append(html_string_english);
             }

@@ -502,7 +502,7 @@ var head_index=[];
     return g_h;
 };
 ////////////////////// function that slides view to posts within one page ///////////////////////////
-var move_left=function(where, text, left, delay){
+var move_left=function(where, text, left, delay){ 
      if(text===where){
           if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1){
               $('body').delay(delay).animate({scrollLeft:left-200}, 1000);
@@ -518,8 +518,8 @@ var getRows=function(el_h, ele){
         font_size=$(ele).css('font-size'),
         scale=1.15,
         line_height=Math.floor(parseInt(font_size)*scale),
-        rows=height/line_height;
-    return num_rows=Math.round(rows);
+        rows=height/line_height; 
+    return num_rows=Math.ceil(rows);
 };
 ////////// function for phone menu animation /////////////////////////////////////////////////////////
 var phone_menu=function(eles, loc, index, proj_name, height_p, curr_index, dur){

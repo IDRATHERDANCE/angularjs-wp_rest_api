@@ -5,6 +5,8 @@ xmlns="http://www.w3.org/1999/xhtml"
 xmlns:og="http://ogp.me/ns#"
 xmlns:fb="http://www.facebook.com/2008/fbml"
 lang="en" ng-app="WpApp" id="WpApp"
+
+ng-class="{'scrollBar': !homeclass, 'noScroll': homeclass}"
 >
 <head>
 <!--meta-->
@@ -34,7 +36,7 @@ var GetIEVersion=function(){
     return 0;
 };
 </script>
-        
+         
 <!--fonts-->
 <link href='http://fonts.googleapis.com/css?family=Nunito:300' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Lora:400,700' rel='stylesheet' type='text/css'>
@@ -123,6 +125,6 @@ if(GetIEVersion()>5){
                 <div ng-view class="view-animate"></div>
             </section>
         <!--disclaimer-->
-        <div class="disclaimer_temp" ng-class="{'disclaimer_temp_away':homeclass}"><p>All Rights Reserved © 2009 - <script> document.write(new Date().getFullYear()) </script>&nbsp;Nina Lieven</p></div>
+        <div class="disclaimer_temp" ng-class="{'disclaimer_temp_away':homeclass}"><p>All Rights Reserved © 2009 -&nbsp;<script> document.write(new Date().getFullYear()) </script>&nbsp;Nina Lieven</p></div>
     </body>
 </html>

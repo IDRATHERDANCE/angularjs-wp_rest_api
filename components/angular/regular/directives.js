@@ -34,7 +34,7 @@ WpApp.directive("menuItemsHover", ['$location', function($location){
 ////////////////////////// adds class to first element in post or page that gives it extra left margin ////////////////////////
 WpApp.directive("extraMargin", [function(){
    return function(scope, element, attrs){
-                if(element.find('b').length===1){ 
+                if(element.find('b').length!==0){ 
                     element.parent().addClass('mar_head');
                 }
                 else{
@@ -86,7 +86,7 @@ WpApp.directive('iframe', ['$window', function($window){
                 var imgparwi=((1500*0.7)*imgwi)/imghi;   
                 }
                 scope.imgparwi = imgparwi;
-              $(element).css('width', imgparwi+3);
+              $(element).css('width', imgparwi-5);
         }, true);
         w.bind('resize', function(){
             scope.$apply();
@@ -129,15 +129,17 @@ WpApp.directive('textBlock', ['$window', '$timeout', function($window, $timeout)
             element.find('br').replaceWith('<p class="specialps"></p>'); 
                scope.trackHeightChanges=function(){
                     return{
-                         'text_height':$(p_box)[0].clientHeight,
-                         'box_height':element[0].clientHeight
+                         
+                         'text_height':$(p_box)[0].offsetHeight,
+                         'box_height':$(element)[0].offsetHeight
+
                       };
                 };
-                scope.$watch(scope.trackHeightChanges, function(newValue, oldValue){
+                scope.$watch(scope.trackHeightChanges, function(newValue, oldValue){ 
                     var rows_exist=getRows(newValue.text_height, p_box),
                         rows_fit=getRows(newValue.box_height, element),
                         divi=rows_exist/rows_fit,
-                        n_times=Math.ceil(divi);
+                        n_times=Math.ceil(divi); 
                         if(n_times===0){n_times=1};
                         scope.n_times=n_times; 
                         $(element).css({
