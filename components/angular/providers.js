@@ -15,7 +15,7 @@ WpApp.service('menuData', ['mainData', function(mainData){
               pages_object=[],
               posts_object=[],
               pages_string='',
-              posts_string='';
+              posts_string=''; 
         for(var i=0;i<data.length;i++){
              if(data[i].type=="page"){
                  var page_title_slug=data[i].title.replace(/\s+/g, '-').toLowerCase(),

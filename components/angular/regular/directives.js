@@ -29,8 +29,6 @@ WpApp.directive("menuItemsHover", ['$location', function($location){
     }
   }
 }]);
-
-
 ////////////////////////// adds class to first element in post or page that gives it extra left margin ////////////////////////
 WpApp.directive("extraMargin", [function(){
    return function(scope, element, attrs){
@@ -47,7 +45,7 @@ WpApp.directive('spinnerGone', ['$timeout', 'mainData', function($timeout, mainD
     return function(scope, element, attrs){ 
         mainData.responseFunction(function(data){
             }).then(function(res){ 
-                $timeout(function(){element.addClass('displaynone');}, 0);
+                element.addClass('displaynone');
             });  
     }
  }]);

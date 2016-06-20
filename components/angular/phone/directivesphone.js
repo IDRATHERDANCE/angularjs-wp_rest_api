@@ -37,18 +37,16 @@ WpApp.directive('iframe', ['$window', function($window){
         var w=angular.element($window),
             imgwi=element.find('iframe').attr('width'),
             imghi=element.find('iframe').attr('height');
+ 
         scope.getWindowDimensions=function(){
             return{
                 'ww':w[0].innerWidth
                 };
         };
         scope.$watch(scope.getWindowDimensions, function(newValue, oldValue){
-            var imgparwi=((newValue.ww*0.7)*imghi)/imgwi;
-            angular.forEach(element, function(el){
-                        angular.element(el).css({
-                         'height':imgparwi
-                        });
-                });
+            
+            var windowhi = (newValue.ww*imghi)/imgwi;
+             $(element.find('iframe')).css('height', windowhi);
         }, true);
         w.bind('resize', function(){
             scope.$apply();
@@ -67,16 +65,17 @@ WpApp.directive("imgFix", ['$window', function($window){
             count=0;
             $(wp_cap).css('width', '100%');
             $(element).css('height', windowhi);
-       var zoomIn=function(){
+       var zoomIn=function(){ 
                   $(image).css({position:'relative', width:'250%', 'max-width':'250%', 'min-width':'250%'});
                   $(wp_cap).css({'overflow':'auto'});
                   $(wp_cap).scrollTop(wp_cap.height()/2).scrollLeft(wp_cap.width()/2);
             },
-           zoomOut=function(){
+           zoomOut=function(){ 
                    $(image).css({position:'static', width:'100%', 'max-width':'100%', 'min-width':'100%'});
                    $(wp_cap).css({overflow:'hidden'});
            };
-        $(element).bind('doubletap, pinch', function(){ 
+       
+        $(element).bind('doubletap', function(){ 
             count+=1;
             count=count%2;
                 if (count==1){

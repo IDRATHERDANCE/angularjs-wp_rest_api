@@ -75,8 +75,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
            document.write('<link href="css/styles.css" type="text/css" rel="stylesheet">');
 }
 //check if it is IE
-if(GetIEVersion()>5){
-            document.write('<script charset="utf-8" src="js/scriptIE10.js"><\/script>');
+if(GetIEVersion()>7){
     document.addEventListener("DOMContentLoaded", function(event) { 
         var oldClassComp = document.getElementsByClassName('comp')[0].className,
             oldClassPhone = document.getElementsByClassName('phone')[0].className;
@@ -84,7 +83,6 @@ if(GetIEVersion()>5){
             document.getElementsByClassName('phone')[0].className = oldClassPhone + ' displaynone';
             document.getElementsByClassName('spinner')[0].className = oldClassPhone + ' displaynone';
     });
-           document.write('<link href="css/styles.css" type="text/css" rel="stylesheet">');	 
 }       
 </script>
  

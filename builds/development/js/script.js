@@ -24,7 +24,7 @@ WpApp.service('menuData', ['mainData', function(mainData){
               pages_object=[],
               posts_object=[],
               pages_string='',
-              posts_string='';
+              posts_string=''; 
         for(var i=0;i<data.length;i++){
              if(data[i].type=="page"){
                  var page_title_slug=data[i].title.replace(/\s+/g, '-').toLowerCase(),
@@ -281,7 +281,7 @@ WpApp.directive('iframe', ['$window', function($window){
                 var imgparwi=((1500*0.7)*imgwi)/imghi;   
                 }
                 scope.imgparwi = imgparwi;
-              $(element).css('width', imgparwi+3);
+              $(element).css('width', imgparwi-5);
         }, true);
         w.bind('resize', function(){
             scope.$apply();
@@ -649,30 +649,42 @@ var route_language_change=function(element){
 };
 ////////////////////// language strings /////////////////////
 var german_language_string=function(element){  
-    var html_string=element[0].innerHTML, 
-    html_string_german=html_string.substring(html_string.indexOf('<br><span'));
+    var html_string=element[0].innerHTML,
+        html_string_german; 
+    if (html_string.indexOf('<br><strong><span style="text-decoration: none;">')>-1){ 
+              html_string_german=html_string.substring(html_string.indexOf('<br><strong><span'));
+      } else { 
+          html_string_german=html_string.substring(html_string.indexOf('<br><span'));    
+      };
     // if just headline with no body text  
     if (html_string.slice(-39)==='<p class="english" extra-margin=""></p>'){ 
         var html_string_english='';
       }                                         
       else{
           // if there is a german version of the text  
-          if(html_string_german.indexOf('<br><span')>-1){  
-            var html_string_english=html_string.substring(html_string.indexOf('<p class="english" extra-margin="">')+35, html_string.indexOf('<br><span'));
-            if(element.children().hasClass('main_head')===false){
+          if((html_string_german.indexOf('<br><span')>-1)||(html_string_german.indexOf('<br><strong><span')>-1)){
+
+            var html_string_english; 
+            if (html_string.indexOf('<br><strong><span')>-1){ 
+                html_string_english=html_string.substring(html_string.indexOf('<p class="english" extra-margin="">')+35, html_string.indexOf('<br><strong><span')); 
+            } else { 
+              html_string_english=html_string.substring(html_string.indexOf('<p class="english" extra-margin="">')+35, html_string.indexOf('<br><span'));  
+            }
+
+            if(element.children().hasClass('main_head')===false){          
                var german='<p class="german">'+html_string_german.substr(4);  
              }
-              else{
+              else{ 
               var german='<p class="german">'+html_string_german;   
               } // check if there is a title
                 if (typeof element[0].childNodes[1]==='undefined'){  
                     $(element[0].childNodes[0]).empty().append(html_string_english).after(german); 
                 } else{
-                    $(element[0].childNodes[1]).empty().append(html_string_english).after(german); 
+                    $(element[0].childNodes[1]).empty().append(html_string_english).after(german)
                 }
            }
         // if there is just english version of the text  
-        else{
+        else{ 
             var html_string_english=html_string.substring(html_string.indexOf('<p class="english" extra-margin="">')+35); 
              $(element[0].childNodes[1]).empty().append(html_string_english);
             }

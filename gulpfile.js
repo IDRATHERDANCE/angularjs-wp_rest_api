@@ -35,7 +35,6 @@ if (env==='development'){
 
 jsSourcesRegular = ['components/angular/*.js', 'components/angular/regular/*.js', 'components/scripts/*.js', 'components/scripts/regular/*.js'];
 jsSourcesPhone = ['components/angular/*.js', 'components/angular/phone/*.js', 'components/scripts/*.js', 'components/scripts/phone/*.js'];
-jsSourcesIE10 = ['components/angular/*.js', 'components/angular/ie10/*.js', 'components/scripts/*.js', 'components/scripts/regular/*.js'];
 sassSources = ['components/sass/styles.scss', 'components/sass/styles_phone.scss'];
 
     gulp.task('sass', function(){
@@ -72,15 +71,6 @@ sassSources = ['components/sass/styles.scss', 'components/sass/styles_phone.scss
             .pipe(connect.reload())
     });
 
-    gulp.task('jsIE10', function(){
-        gulp.src(jsSourcesIE10)
-            .pipe(concat('scriptIE10.js'))
-            .pipe(browserify())
-            .pipe(guplif(env==='production', uglify()))
-            .pipe(gulp.dest(outputDir + 'js'))
-            .pipe(connect.reload())
-    });
-
     gulp.task('html', function(){
          gulp.src('builds/development/*.html')
          .pipe(guplif(env==='production', minifyHTML()))
@@ -99,7 +89,6 @@ sassSources = ['components/sass/styles.scss', 'components/sass/styles_phone.scss
         gulp.watch('components/sass/*.scss', ['sass']);
         gulp.watch(jsSourcesRegular, ['js']);
         gulp.watch(jsSourcesPhone, ['jsPhone']);
-        gulp.watch(jsSourcesIE10, ['jsIE10']);
         gulp.watch('builds/development/*.html', ['html']);
         gulp.watch('builds/development/part/*.html', ['htmlPage']);
      });
@@ -114,6 +103,6 @@ sassSources = ['components/sass/styles.scss', 'components/sass/styles_phone.scss
         })
     });
 
-    gulp.task('default', ['html', 'htmlPage', 'sass', 'js', 'jsPhone', 'jsIE10', 'connect', 'watch']);
+    gulp.task('default', ['html', 'htmlPage', 'sass', 'js', 'jsPhone', 'connect', 'watch']);
 
 
