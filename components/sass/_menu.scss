@@ -67,10 +67,17 @@
 .leben {@include vendor-prefix(transition, all 1s ease-in-out);top:265px;left:12px; &.leben_home {top:239px;left:1px;}} 
 .pro_p_leben {@include vendor-prefix(transition, all 1s ease-in-out);left:0;&.pro_p_leben_home {left:1px;}}   
    
+.sunset {@include vendor-prefix(transition, all 1s ease-in-out);bottom: 189px;left:12px; &.sunset_home {bottom:185px;left:12px;}} 
+.pro_p_sunset {@include vendor-prefix(transition, all 1s ease-in-out);left:0;&.pro_p_sunset_home {left:395px;}}   
+
+.news {@include vendor-prefix(transition, all 1s ease-in-out);bottom: 125px;left:12px; &.news_home {bottom:125px;left:12px;}} 
+.pro_p_news {@include vendor-prefix(transition, all 1s ease-in-out);left:0;&.pro_p_news_home {left:383px;}}   
+
+.press {@include vendor-prefix(transition, all 1s ease-in-out);bottom: 85px;left:12px; &.press_home {bottom:85px;left:12px;}} 
+.pro_p_press {@include vendor-prefix(transition, all 1s ease-in-out);left:0;&.pro_p_press_home {left:357px;}}   
 
 
-.news {@include vendor-prefix(transition, all 1s ease-in-out);bottom: 110px;left:12px; &.news_home {bottom:85px;left:12px;}} 
-.pro_p_news {@include vendor-prefix(transition, all 1s ease-in-out);left:0;&.pro_p_news_home {left:360px;}}   
+
 
 
 .about {@include vendor-prefix(transition, all 1s ease-in-out);bottom: 33px;left:12px; &.about_home {bottom:30px;left:12px;}} 

@@ -101,8 +101,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -o-transform: rotate(-90deg);
   transform: rotate(-90deg);
   float: left;
-  top: 1%;
-  margin-left: 40px;
+  top: 0%;
+  margin-left: 35px;
   opacity: 0;
   z-index: 5;
   -webkit-transition: all 1s ease-in-out;
@@ -472,17 +472,43 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   left: 1px;
 }
 
+.sunset {
+  -webkit-transition: all 1s ease-in-out;
+  -ms-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+  bottom: 189px;
+  left: 12px;
+}
+.sunset.sunset_home {
+  bottom: 185px;
+  left: 12px;
+}
+
+.pro_p_sunset {
+  -webkit-transition: all 1s ease-in-out;
+  -ms-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+  left: 0;
+}
+.pro_p_sunset.pro_p_sunset_home {
+  left: 395px;
+}
+
 .news {
   -webkit-transition: all 1s ease-in-out;
   -ms-transition: all 1s ease-in-out;
   -moz-transition: all 1s ease-in-out;
   -o-transition: all 1s ease-in-out;
   transition: all 1s ease-in-out;
-  bottom: 110px;
+  bottom: 125px;
   left: 12px;
 }
 .news.news_home {
-  bottom: 85px;
+  bottom: 125px;
   left: 12px;
 }
 
@@ -495,7 +521,33 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   left: 0;
 }
 .pro_p_news.pro_p_news_home {
-  left: 360px;
+  left: 383px;
+}
+
+.press {
+  -webkit-transition: all 1s ease-in-out;
+  -ms-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+  bottom: 85px;
+  left: 12px;
+}
+.press.press_home {
+  bottom: 85px;
+  left: 12px;
+}
+
+.pro_p_press {
+  -webkit-transition: all 1s ease-in-out;
+  -ms-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+  left: 0;
+}
+.pro_p_press.pro_p_press_home {
+  left: 357px;
 }
 
 .about {
