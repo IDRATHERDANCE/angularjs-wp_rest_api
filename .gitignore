@@ -70,6 +70,7 @@ node_modules
 .tmp
 */.sass-cache/
 
+builds
 wordpress
 */bower_components/
 bower_components/
