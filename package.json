@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/IDRATHERDANCE/angularjs-wp_rest_api",
   "devDependencies": {
-    "angular": "^1.5.5",
     "browserify": "^13.0.0",
     "browserify-shim": "^3.8.12",
     "cors": "^2.7.1",
@@ -46,7 +45,6 @@
     "gulp-uglifycss": "^1.0.6",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.5",
-    "jquery": "^2.2.3",
     "vinyl-source-stream": "^1.1.0",
     "vinyl-transform": "^1.0.0"
   },

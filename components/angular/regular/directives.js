@@ -228,7 +228,7 @@ WpApp.directive("menuAnimation", ['$location', '$routeParams', '$timeout', funct
                     scope.el_left=element.parent()[0].offsetLeft;
                 var el_text=scope.el_text,
                     el_left=scope.el_left,
-                    location=scope.location;
+                    location=scope.location; 
                 // changes between two posts of the different pages
                 if($routeParams.post!=undefined){
                   move_left($routeParams.post, el_text, el_left, 1000); 
@@ -236,7 +236,7 @@ WpApp.directive("menuAnimation", ['$location', '$routeParams', '$timeout', funct
                 // always start from left 0    
                 $('html, body').scrollLeft(0);
             // on location change move slide page
-            scope.$on('$routeChangeStart', function(next, current){
+            scope.$on('$routeChangeStart', function(next, current){ 
                 if(location===current.params.page){
                      if(current.params.post!==undefined){
                       el_left=element.parent()[0].offsetLeft;
