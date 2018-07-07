@@ -242,8 +242,7 @@ WpApp.directive("menuAnimation", ['$location', '$routeParams', '$timeout', funct
                       el_left=element.parent()[0].offsetLeft;
                       $location.update_path(location+'/'+current.params.post, true);
                       move_left(current.params.post, el_text, el_left, 0);
-                     }
-                      else{
+                     } else{
                         el_left=element.parent()[0].offsetLeft;
                         $location.update_path(location, true);
                         move_left(location, el_text, el_left, 0);

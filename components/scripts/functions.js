@@ -1,4 +1,4 @@
-var $ = jQuery = require('jquery');
+var $ = require('jquery');
 ////// function that goes through big data object from a service and depending on type and location and assamles it as a string /////
 var content_string_assemble=function(pagectt, loc){
      var ps_group_head=[],
