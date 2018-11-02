@@ -34,8 +34,8 @@ RewriteRule (.*) index.html [L]
  RewriteCond %{HTTP_REFERER} blackle\.com [NC]
  RewriteRule .* - [F]
 
-RewriteCond %{HTTP_HOST} ^www.ninalieven.net$ [NC]
-RewriteRule ^(.*)$ http://ninalieven.net/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} ^www.ninalieven.com$ [NC]
+RewriteRule ^(.*)$ http://ninalieven.com/$1 [R=301,L]
 
 Options -Indexes
 RewriteEngine on

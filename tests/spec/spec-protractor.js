@@ -1,7 +1,7 @@
-describe('ninalieven.net protractor e2e tests', function() {
+describe('ninalieven.com protractor e2e tests', function() {
   
 beforeEach(function(){
-browser.get('http://ninalieven.net/');    
+browser.get('http://ninalieven.com/');    
 });
     
 var page,
@@ -18,14 +18,14 @@ var page,
             element.all(by.css('p[class^="pro_p"] a')).each(function(element, index) {
                    element.getText().then(function(text) {
                         element.click();
-                            expect(browser.getCurrentUrl()).toBe('http://ninalieven.net/' + textForm(text) )  
+                            expect(browser.getCurrentUrl()).toBe('http://ninalieven.com/' + textForm(text) )  
                         pege=textForm(text);
                     return page;
                    });
                    element.all(by.css('.posts p a')).each(function(element, index) {
                        element.getText().then(function(text) {
                             element.click();
-                                expect(browser.getCurrentUrl()).toBe('http://ninalieven.net/' + page + '/' + textForm(text))  
+                                expect(browser.getCurrentUrl()).toBe('http://ninalieven.com/' + page + '/' + textForm(text))  
                        });
                     });    
             }); 

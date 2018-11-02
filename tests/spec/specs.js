@@ -4,8 +4,8 @@
 //var ngAnimate = require('angular-animate');
 //var ngResource = require('angular-resource');
 //var ngSanitize = require('angular-sanitize');
-describe('ninalieven.net unit tests', function(){
-        var expectedUrl='http://ninalieven.net/wordpress/wp-json/posts?type[]=page&type[]=post',
+describe('ninalieven.com unit tests', function(){
+        var expectedUrl='http://ninalieven.com/wordpress/wp-json/posts?type[]=page&type[]=post',
             expectRoute='/part/page.html';
 
     

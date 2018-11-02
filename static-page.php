@@ -2,8 +2,8 @@
 <?
 $request = $_GET['_escaped_fragment_'];
 $request_l = substr($request, strrpos($request, '/') + 1);
-$pageUrl = 'http://ninalieven.net'.$request;
-$jsonurl = "http://ninalieven.net/wordpress/wp-json/posts?type[]=page&type[]=post";
+$pageUrl = 'http://ninalieven.com'.$request;
+$jsonurl = "http://ninalieven.com/wordpress/wp-json/posts?type[]=page&type[]=post";
 $json = file_get_contents($jsonurl);
 $json_output = json_decode($json);
 $lenght = sizeof($json_output);

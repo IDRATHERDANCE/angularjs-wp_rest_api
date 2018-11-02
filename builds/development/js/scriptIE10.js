@@ -11,7 +11,7 @@ var WpApp=angular.module('WpApp', ['ngRoute', 'ngAnimate', 'ngResource', 'ngSani
 WpApp.factory('mainData', ['$http', function($http){
     return {
             responseFunction: function(){
-               return $http.get('http://ninalieven.net/wordpress/wp-json/posts?type[]=page&type[]=post', {cache:true}); 
+               return $http.get('http://ninalieven.com/wordpress/wp-json/posts?type[]=page&type[]=post', {cache:true}); 
          }
     } 
  }]);

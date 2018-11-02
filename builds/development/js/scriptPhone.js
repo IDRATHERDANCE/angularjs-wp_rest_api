@@ -11,7 +11,7 @@ var WpApp=angular.module('WpApp', ['ngRoute', 'ngAnimate', 'ngResource', 'ngSani
 WpApp.factory('mainData', ['$http', function($http){
     return {
             responseFunction: function(){
-               return $http.get('http://ninalieven.net/wordpress/wp-json/posts?type[]=page&type[]=post', {cache:true}); 
+               return $http.get('http://ninalieven.com/wordpress/wp-json/posts?type[]=page&type[]=post', {cache:true}); 
          }
     } 
  }]);
@@ -215,7 +215,7 @@ WpApp.directive("singleBlock", [function(){
          if(element.find('p').text()===''){
                 element.find('p').remove();
            } 
-           if((element.find('a').attr('href')!==undefined)&&(element.find('a').attr('href').substring(0, 32)==='http://ninalieven.net/wordpress/')){ 
+           if((element.find('a').attr('href')!==undefined)&&(element.find('a').attr('href').substring(0, 32)==='http://ninalieven.com/wordpress/')){ 
                 $(element.find('a')[0]).contents().unwrap();
            }
                 element.find('a').attr('target', '_blank');

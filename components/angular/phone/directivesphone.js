@@ -22,7 +22,7 @@ WpApp.directive("singleBlock", [function(){
          if(element.find('p').text()===''){
                 element.find('p').remove();
            } 
-           if((element.find('a').attr('href')!==undefined)&&(element.find('a').attr('href').substring(0, 32)==='http://ninalieven.net/wordpress/')){ 
+           if((element.find('a').attr('href')!==undefined)&&(element.find('a').attr('href').substring(0, 32)==='http://ninalieven.com/wordpress/')){ 
                 $(element.find('a')[0]).contents().unwrap();
            }
                 element.find('a').attr('target', '_blank');
