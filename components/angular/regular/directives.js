@@ -124,28 +124,27 @@ WpApp.directive('textBlock', ['$window', '$timeout', function($window, $timeout)
         var w=angular.element($window),
             p_box=$(element[0].querySelector('.english')),
             p_box_ger = $(element[0].querySelector('.german'));
+            scope.lang = 'eng';
             element.find('br').replaceWith('<p class="specialps"></p>'); 
                scope.trackHeightChanges=function(){
-                    return{
-                         
-                         'text_height':$(p_box)[0].offsetHeight,
-                         'box_height':$(element)[0].offsetHeight
-
-                      };
+                    return { 'text_height':$(p_box)[0].offsetHeight || $(p_box_ger)[0].offsetHeight,
+                             'box_height':$(element)[0].offsetHeight };
                 };
-                scope.$watch(scope.trackHeightChanges, function(newValue, oldValue){ 
+
+                scope.$watch(scope.trackHeightChanges, function(newValue){ 
                     var rows_exist=getRows(newValue.text_height, p_box),
-                        rows_fit=getRows(newValue.box_height, element),
-                        divi=rows_exist/rows_fit,
-                        n_times=Math.ceil(divi); 
-                        if(n_times===0){n_times=1};
-                        scope.n_times=n_times; 
-                        $(element).css({
-                             'width':(n_times*400)+(n_times*40),
-                             'max-width':(n_times*600)+(n_times*40),
-                             'min-width':(n_times*400)+(n_times*40)
-                        });
+                    rows_fit=getRows(newValue.box_height, element),
+                    divi=rows_exist/rows_fit,
+                    n_times=Math.ceil(divi); 
+                    if(n_times===0){n_times=1};
+                    scope.n_times=n_times;
+                    $(element).css({
+                         'width':(n_times*400)+(n_times*40),
+                         'max-width':(n_times*600)+(n_times*40),
+                         'min-width':(n_times*400)+(n_times*40)
+                    });
                 }, true); 
+
         $timeout(function(){scope.$apply();},0);
         w.bind('resize', function(){
             scope.$apply();
@@ -159,8 +158,7 @@ WpApp.directive('textBlock', ['$window', '$timeout', function($window, $timeout)
                 p_box=$(element[0].querySelector('.german'));  
                 scope.$apply();
             }
-         } 
-            else{
+         } else{
                 if(typeof p_box[0]!=='undefined'){ 
                     p_box=$(element[0].querySelector('.english'));  
                     scope.$apply();
@@ -236,7 +234,7 @@ WpApp.directive("menuAnimation", ['$location', '$routeParams', '$timeout', funct
                 // always start from left 0    
                 $('html, body').scrollLeft(0);
             // on location change move slide page
-            scope.$on('$routeChangeStart', function(next, current){ 
+            scope.$on('$routeChangeStart', function(next, current){
                 if(location===current.params.page){
                      if(current.params.post!==undefined){
                       el_left=element.parent()[0].offsetLeft;
